@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/08 10:21:06 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/08 18:03:17 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,19 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define screenWidth	1280
-# define screenHeight	720
+# define screenWidth	720
+# define screenHeight	360
 # define mapWidth		24
 # define mapHeight		24
+
+
+# define KEY_ANSI_A		(0X00)
+# define KEY_ANSI_S		(0X01)
+# define KEY_ANSI_D		(0X02)
+# define KEY_ANSI_W		(0X0D)
+# define KEY_LEFTARROW	(0X7B)
+# define KEY_RIGHTARROW	(0X7C)
+# define KEY_ESCAPE		(0X35)
 
 typedef struct s_data
 {
@@ -37,7 +46,14 @@ typedef struct s_data
 	int		mlx_size_line;
 	int		mlx_endian;
 
-	int		blue;
+	double	posX;
+	double	posY;
+
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+
 }			t_data;
 
 #endif
