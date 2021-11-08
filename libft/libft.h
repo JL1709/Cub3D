@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:56:26 by jludt             #+#    #+#             */
-/*   Updated: 2021/07/01 12:37:47 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/06 12:47:48 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define BUFFER_SIZE 1
 
 typedef struct s_list
 {
@@ -67,5 +69,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*get_next_line(int fd);
 
 #endif
