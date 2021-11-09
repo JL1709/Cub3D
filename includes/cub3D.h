@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/08 18:03:17 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/09 09:50:08 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,21 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define screenWidth	720
-# define screenHeight	360
+# define screenWidth	640
+# define screenHeight	480
+# define texWidth		64
+# define texHeight		64
 # define mapWidth		24
 # define mapHeight		24
+
+# define IMG_EAGLE			"./images/eagle.pgn"
+# define IMG_REDBRICK		"./images/redbrick.pgn"
+# define IMG_PURPLESTONE	"./images/purplestone.pgn"
+# define IMG_GREYSTONE		"./images/greystone.pgn"
+# define IMG_BLUESTONE		"./images/bluestone.pgn"
+# define IMG_MOSSY			"./images/mossy.pgn"
+# define IMG_WOOD			"./images/wood.pgn"
+# define IMG_COLORSTONE		"./images/colorstone.pgn"
 
 
 # define KEY_ANSI_A		(0X00)
@@ -32,6 +43,14 @@
 # define KEY_LEFTARROW	(0X7B)
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
+
+/* Struct 'img' for handling the game's tiles and sprites sizes */
+typedef struct s_img
+{
+	void	*img;
+	int		width;
+	int		height;
+}				t_img;
 
 typedef struct s_data
 {
@@ -54,6 +73,10 @@ typedef struct s_data
 	double	planeX;
 	double	planeY;
 
+	t_img	*img[8];
+
 }			t_data;
+
+
 
 #endif
