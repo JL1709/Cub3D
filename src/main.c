@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/08 18:19:25 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/09 08:07:26 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int	game_on(t_data *data)
 			perpWallDist = (sideDistY - deltaDistY);
 		
 		//Calculate height of line to draw on screen
-		lineHeight = (int)(screenHeight / perpWallDist);
+		lineHeight = (int)(screenHeight / perpWallDist) * 3;
 
 		//calculate lowest and highest pixel to fill in current stripe
 		drawStart = -lineHeight / 2 + screenHeight / 2;
