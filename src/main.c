@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/11 16:41:58 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/11 19:10:43 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 int worldMap[mapWidth][mapHeight]=
 {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+  {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
+  {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+  {4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+  {4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+  {4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+  {4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
+  {4,0,5,0,0,0,0,5,0,5,0,5,0,5,0,5,7,0,0,0,7,7,7,1},
+  {4,0,6,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+  {4,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,1},
+  {4,0,8,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+  {4,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,7,7,7,1},
+  {4,0,0,0,0,0,0,5,5,5,5,0,5,5,5,5,7,7,7,7,7,7,7,1},
+  {6,6,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+  {8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+  {6,6,6,6,6,6,0,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+  {4,4,4,4,4,4,0,4,4,4,6,0,6,2,2,2,2,2,2,2,3,3,3,3},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,5,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+  {4,0,6,0,6,0,0,0,0,4,6,0,0,0,0,0,5,0,0,0,0,0,0,2},
+  {4,0,0,5,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+  {4,0,6,0,6,0,0,0,0,4,6,0,6,2,0,0,5,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+  {4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
 };
 
 long long	get_time(void)
@@ -64,8 +64,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int	game_on(t_data *data)
 {
 	int		x;
-	// double	time = 0; //time of current frame
-	// double	oldTime = 0; //time of previous frame
 
 	double cameraX;
 	double rayDirX;
@@ -98,8 +96,6 @@ int	game_on(t_data *data)
 	int	drawStart;
 	int	drawEnd;
 
-	int		color;
-	
 	data->mlx_img = mlx_new_image(data->mlx, screenWidth, screenHeight);
 		
 	x = -1;
@@ -115,8 +111,8 @@ int	game_on(t_data *data)
 		mapY = (int)data->posY;
 		
 		//length of ray from one x or y-side to next x or y-side
-		deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+		deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
 
 		hit = 0; //was there a wall hit?
 		
@@ -178,25 +174,36 @@ int	game_on(t_data *data)
 		if (drawEnd >= screenHeight)
 			drawEnd = screenHeight - 1;
 
-		if (worldMap[mapX][mapY] == 1)
-			color = create_trgb(0, 255, 0, 0);		//red
-		else if (worldMap[mapX][mapY] == 2)
-			color = create_trgb(0, 0, 255, 0);		//green
-		else if (worldMap[mapX][mapY] == 3)
-			color = create_trgb(0, 0, 0, 255);		//blue
-		else if (worldMap[mapX][mapY] == 4)
-			color = create_trgb(0, 255, 255, 255);	//white
-		else
-			color = create_trgb(0, 255, 255, 0);	//yellow
-		if (side == 1)
-			color = color / 2;
-		
+		//texturing calculations
+		int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if (side == 0) wallX = data->posY + perpWallDist * rayDirY;
+		else           wallX = data->posX + perpWallDist * rayDirX;
+		wallX -= floor((wallX));
+
+		//x coordinate on the texture
+		int texX = (int)(wallX * (double)(texWidth));
+		if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+		if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+		// How much to increase the texture coordinate per screen pixel
+		double step = 1.0 * texHeight / lineHeight;
+		// Starting texture coordinate
+		double texPos = (drawStart - screenHeight / 2 + lineHeight / 2) * step;
 		data->mlx_data_addr = mlx_get_data_addr(data->mlx_img, &data->mlx_bits_per_pixel, \
 						&data->mlx_size_line, &data->mlx_endian);
-		while (drawStart < drawEnd)
+		for(int y = drawStart; y<drawEnd; y++)
 		{
-			my_mlx_pixel_put(data, x, drawStart, color);
-			drawStart++;
+			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+			int texY = (int)texPos & (texHeight - 1);
+			texPos += step;
+			unsigned int color = data->texture[texNum][texHeight * texY + texX];
+			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			if(side == 1) color = (color >> 1) & 8355711;
+			data->buffer[y][x] = color;
+			my_mlx_pixel_put(data, x, y, color);
 		}
 	}
 	data->oldTime = data->time;
@@ -268,8 +275,14 @@ int	interactive(int key, t_data *data)
 
 void	initialize_map(t_data *data)
 {	
+	int	x;
+	int	y;
+	int	xorcolor;
+	int	ycolor;
+	int	xycolor;
+	
 	data->posX = 22;		//x start position
-	data->posY = 12;		//y start position
+	data->posY = 11.5;		//y start position
 	data->dirX = -1;		//initial direction vector
 	data->dirY = 0;			//initial direction vector
 	data->planeX = 0;
@@ -277,6 +290,26 @@ void	initialize_map(t_data *data)
 	data->time = get_time();			//time of current frame
 	data->oldTime = 0;		//time of previous frame
 	data->frameTime = 0;	//frameTime is the time this frame has taken, in seconds
+
+	x = -1;
+	while (++x < texWidth)
+	{
+		y = -1;
+		while (++y < texHeight)
+		{
+			xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
+			ycolor = y * 256 / texHeight;
+			xycolor = y * 128 / texHeight + x * 128 / texWidth;
+			data->texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
+			data->texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			data->texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			data->texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+			data->texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
+			data->texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+			data->texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
+			data->texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+		}
+	}
 }
 
 int	main(int argc, char *argv[])

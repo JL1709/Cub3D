@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 16:40:31 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/11 18:42:17 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define screenWidth	720
 # define screenHeight	360
+# define texWidth		64
+# define texHeight		64
 # define mapWidth		24
 # define mapHeight		24
 
@@ -55,6 +57,9 @@ typedef struct s_data
 	double	dirY;
 	double	planeX;
 	double	planeY;
+
+	unsigned int	buffer[screenHeight][screenWidth];
+	int				texture[8][texWidth * texHeight + texWidth];
 
 	double	time;
 	double	oldTime;
