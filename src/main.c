@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/09 08:07:26 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/11 16:41:58 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ int worldMap[mapWidth][mapHeight]=
   {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
+
+long long	get_time(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
 
 int		create_trgb(int t, int r, int g, int b)
 {
@@ -191,7 +199,9 @@ int	game_on(t_data *data)
 			drawStart++;
 		}
 	}
-	
+	data->oldTime = data->time;
+	data->time = get_time();
+	data->frameTime = (data->time - data->oldTime) / 1000.0;
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->mlx_img, 0, 0);
 	mlx_destroy_image(data->mlx, data->mlx_img);
 	return (0);
@@ -208,20 +218,50 @@ int	ft_close(t_data *data) // quit game when ESC is pressed
 
 int	interactive(int key, t_data *data)
 {	
+	//speed modifiers
+	double moveSpeed = data->frameTime * 5.0; //the constant value is in squares/second
+	double rotSpeed = data->frameTime * 3.0; //the constant value is in radians/second
+	
 	if (key == KEY_ESCAPE) //free data befor exiting still to be done
 		exit(0);
-	else if (key == KEY_ANSI_A)			//move to the left
-			data->posY -= 0.2;
-	else if (key == KEY_ANSI_D)			//move to the right
-		data->posY += 0.2;
 	else if (key == KEY_ANSI_W)			//move forward
-			data->posX -= 0.2;
+	{
+		if (worldMap[(int)(data->posX + data->dirX * moveSpeed)][(int)data->posY] == 0)
+			data->posX += data->dirX * moveSpeed;
+		if(worldMap[(int)data->posX][(int)(data->posY + data->dirY * moveSpeed)] == 0) 
+			data->posY += data->dirY * moveSpeed;
+	}
 	else if (key == KEY_ANSI_S)			//move backwards
-			data->posX += 0.2;
-	// else if (key == KEY_LEFTARROW)		//look/turn to the left
-	// 	data->dirX -= 1;
-	// else if (key == KEY_RIGHTARROW)		//look/turn to the right
-	// 	data->dirX += 1;
+	{
+		if (worldMap[(int)(data->posX + data->dirX * moveSpeed)][(int)data->posY] == 0)
+			data->posX -= data->dirX * moveSpeed;
+		if(worldMap[(int)data->posX][(int)(data->posY + data->dirY * moveSpeed)] == 0) 
+			data->posY -= data->dirY * moveSpeed;
+	}
+	// else if (key == KEY_ANSI_A)			//move to the left
+	// 	data->posY -= 0.2;
+	// else if (key == KEY_ANSI_D)			//move to the right
+	// 	data->posY += 0.2;
+	else if (key == KEY_LEFTARROW)			//rotate to the left
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = data->dirX;
+		data->dirX = data->dirX * cos(rotSpeed) - data->dirY * sin(rotSpeed);
+		data->dirY = oldDirX * sin(rotSpeed) + data->dirY * cos(rotSpeed);
+		double oldPlaneX = data->planeX;
+		data->planeX = data->planeX * cos(rotSpeed) - data->planeY * sin(rotSpeed);
+		data->planeY = oldPlaneX * sin(rotSpeed) + data->planeY * cos(rotSpeed);
+	}
+	else if (key == KEY_RIGHTARROW)		//rotate to the right
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = data->dirX;
+		data->dirX = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
+		data->dirY = oldDirX * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
+		double oldPlaneX = data->planeX;
+		data->planeX = data->planeX * cos(-rotSpeed) - data->planeY * sin(-rotSpeed);
+		data->planeY = oldPlaneX * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
+	}
 	return (0);
 }
 
@@ -234,6 +274,9 @@ void	initialize_map(t_data *data)
 	data->dirY = 0;			//initial direction vector
 	data->planeX = 0;
 	data->planeY = 0.66;	//the 2d raycaster version of camera plane
+	data->time = get_time();			//time of current frame
+	data->oldTime = 0;		//time of previous frame
+	data->frameTime = 0;	//frameTime is the time this frame has taken, in seconds
 }
 
 int	main(int argc, char *argv[])

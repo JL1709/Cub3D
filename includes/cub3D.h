@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/08 18:03:17 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/11 16:40:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <stdio.h>
 # include <math.h>
 # include <errno.h>
+# include <time.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+#include <sys/time.h>
 
 # define screenWidth	720
 # define screenHeight	360
@@ -53,6 +55,10 @@ typedef struct s_data
 	double	dirY;
 	double	planeX;
 	double	planeY;
+
+	double	time;
+	double	oldTime;
+	double	frameTime;
 
 }			t_data;
 
