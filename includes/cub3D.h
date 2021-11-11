@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 09:02:58 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:35:46 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+# include <sys/time.h>
 
 # define screenWidth	1024
 # define screenHeight	512
@@ -36,6 +37,15 @@
 # define KEY_LEFTARROW	(0X7B)
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+}			t_keys;
+
 
 typedef struct s_img
 {
@@ -58,22 +68,28 @@ typedef struct s_data
 	float	pdx;	//delta x
 	float	pdy;	//delta y
 	float	pa;		//angle of player;
+
+	float	frame1;
+	float	frame2; 
+	float	fps;
 	
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
+	t_keys	keys;
 }			t_data;
 
 
-int		interactive(int key, t_data	*data);
-int		create_trgb(int t, int r, int g, int b);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	initialize_map(t_data *data);
-void 	drawPlayer(t_data *data);
-void 	drawDirection(t_data *data);
-void	drawWindowGray(t_data *data);
-void 	drawMap(t_data *data);
-void	drawRays2D(t_data *data);
-float	dist(float ax, float ay, float bx, float by);
+int			interactive(int key, t_data	*data);
+int			create_trgb(int t, int r, int g, int b);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		initialize_map(t_data *data);
+void 		drawPlayer(t_data *data);
+void 		drawDirection(t_data *data);
+void		drawWindowGray(t_data *data);
+void 		drawMap(t_data *data);
+void		drawRays2D(t_data *data);
+float		dist(float ax, float ay, float bx, float by);
+long long	get_time(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 15:31:10 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 12:25:22 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/11 17:36:50 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	initialize_map(t_data *data)
 		else
 			data->worldMap[i] = 0;
 	}
+	data->frame2 = get_time();
+	data->frame1 = 0;
+	data->fps = 0;
 	data->px = 300;					//x start position
 	data->py = 300;					//y start position
 	data->pa = 0;					//angle of player;
