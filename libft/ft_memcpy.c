@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/19 13:21:45 by julian            #+#    #+#             */
-/*   Updated: 2021/07/01 11:38:27 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/09 20:37:00 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	cache_dst = (unsigned char *)dst;
 	cache_src = (unsigned char *)src;
-	if (cache_dst == '\0' && cache_src == '\0')
+	if (cache_dst == NULL && cache_src == NULL)
 		return (dst);
 	while (n--)
 		*cache_dst++ = *cache_src++;

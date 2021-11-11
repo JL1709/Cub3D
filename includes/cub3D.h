@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/09 09:50:08 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/09 17:14:34 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define IMG_MOSSY			"./images/mossy.pgn"
 # define IMG_WOOD			"./images/wood.pgn"
 # define IMG_COLORSTONE		"./images/colorstone.pgn"
-
+# define IMG_BOX_WALL		"./images/Box_Wall.xpm"
 
 # define KEY_ANSI_A		(0X00)
 # define KEY_ANSI_S		(0X01)
@@ -44,37 +44,50 @@
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
 
-/* Struct 'img' for handling the game's tiles and sprites sizes */
 typedef struct s_img
 {
-	void	*img;
+	void	*img_ptr;
 	int		width;
 	int		height;
+	int		x;
+	int		y;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	char	*data_addr;
 }				t_img;
+
+typedef struct s_window
+{
+	void	*win_ptr;
+	int		width;
+	int		height;
+}			t_window;;
+
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
-	int		mlx_img_width;
-	int		mlx_img_height;
-	char	*mlx_data_addr;
-	char	*relative_path;
-	int		mlx_bits_per_pixel;
-	int		mlx_size_line;
-	int		mlx_endian;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	void		*mlx_img;
+	int			mlx_img_width;
+	int			mlx_img_height;
+	char		*mlx_data_addr;
+	char		*relative_path;
+	int			mlx_bits_per_pixel;
+	int			mlx_size_line;
+	int			mlx_endian;
 
-	double	posX;
-	double	posY;
+	double		posX;
+	double		posY;
 
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 
-	t_img	*img[8];
-
+	t_img		**img;
+	t_window	win;
 }			t_data;
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/09 10:04:52 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/09 21:14:09 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	game_on(t_data *data)
 {
 	int		x;
 	int		y;
-	int		i;
-	int		j;
+	// int		i;
+	// int		j;
 	// double	time = 0; //time of current frame
 	// double	oldTime = 0; //time of previous frame
 
@@ -113,36 +113,91 @@ int	game_on(t_data *data)
 	// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 	int texY;
 
-	unsigned int	color;
+	int	color;
+
+	// generate some textures
+	unsigned int	texture[8][texWidth * texHeight];
+	int				xcolor;
+	int				ycolor;
+	int				xycolor;
+	x = -1;
+	while (++x < texWidth)
+	{
+		y = -1;
+		while (++y < texHeight)
+		{
+			xcolor = x * 256 / texWidth;
+			ycolor = x * 256 / texHeight;
+			xycolor = y * 128 / texHeight + x * 128 / texWidth;
+		    texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
+			texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			texture[3][texWidth * y + x] = xcolor + 256 * xcolor + 65536 * xcolor; //xor greyscale
+			texture[4][texWidth * y + x] = 256 * xcolor; //xor green
+			texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+			texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
+			texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+		}
+	}
 
 	// load images
-	data->img[0] = ft_calloc(1, sizeof(t_img));
-	data->img[0]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_EAGLE, &data->img[0]->width, &data->img[0]->height);
-	data->img[1] = ft_calloc(1, sizeof(t_img));
-	data->img[1]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_REDBRICK, &data->img[1]->width, &data->img[1]->height);
-	data->img[2] = ft_calloc(1, sizeof(t_img));
-	data->img[2]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_PURPLESTONE, &data->img[2]->width, &data->img[2]->height);
-	data->img[3] = ft_calloc(1, sizeof(t_img));
-	data->img[3]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_GREYSTONE, &data->img[3]->width, &data->img[3]->height);
-	data->img[4] = ft_calloc(1, sizeof(t_img));
-	data->img[4]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_BLUESTONE, &data->img[4]->width, &data->img[4]->height);
-	data->img[5] = ft_calloc(1, sizeof(t_img));
-	data->img[5]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_MOSSY, &data->img[5]->width, &data->img[5]->height);
-	data->img[6] = ft_calloc(1, sizeof(t_img));
-	data->img[6]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_WOOD, &data->img[6]->width, &data->img[6]->height);
-	data->img[7] = ft_calloc(1, sizeof(t_img));
-	data->img[7]->img = mlx_png_file_to_image(data->mlx, \
-		IMG_COLORSTONE, &data->img[7]->width, &data->img[7]->height);
+	// data->img = (t_img **)ft_calloc(9, sizeof(t_img *));
 
-	data->mlx_img = mlx_new_image(data->mlx, screenWidth, screenHeight);
+	// data->img[0] = (t_img *)malloc(sizeof(t_img));
+	// data->img[0]->img_ptr = mlx_new_image(data->mlx_ptr, \
+	// 	data->win.width, data->win.height);
+	// data->img[0]->data_addr = mlx_get_data_addr(data->img[0]->img_ptr, &data->img[0]->bpp, 
+	// 	&data->img[0]->size_line, &data->img[0]->endian);
+
+	// data->img[1] = (t_img *)malloc(sizeof(t_img));
+	// data->img[1]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[1]->width, &data->img[1]->height);
+	// data->img[1]->data_addr = mlx_get_data_addr(data->img[1]->img_ptr, &data->img[1]->bpp, 
+	// 	&data->img[1]->size_line, &data->img[1]->endian);
+
+	// data->img[2] = (t_img *)malloc(sizeof(t_img));
+	// data->img[2]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[2]->width, &data->img[2]->height);
+	// data->img[2]->data_addr = mlx_get_data_addr(data->img[2]->img_ptr, &data->img[2]->bpp, 
+	// 	&data->img[2]->size_line, &data->img[2]->endian);
 		
+	// data->img[3] = (t_img *)malloc(sizeof(t_img));
+	// data->img[3]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[3]->width, &data->img[3]->height);
+	// data->img[3]->data_addr = mlx_get_data_addr(data->img[3]->img_ptr, &data->img[3]->bpp, 
+	// 	&data->img[3]->size_line, &data->img[3]->endian);
+
+	// data->img[4] = (t_img *)malloc(sizeof(t_img));
+	// data->img[4]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[4]->width, &data->img[4]->height);
+	// data->img[4]->data_addr = mlx_get_data_addr(data->img[4]->img_ptr, &data->img[4]->bpp, 
+	// 	&data->img[4]->size_line, &data->img[4]->endian);
+
+	// data->img[5] = (t_img *)malloc(sizeof(t_img));
+	// data->img[5]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[5]->width, &data->img[5]->height);
+	// data->img[5]->data_addr = mlx_get_data_addr(data->img[5]->img_ptr, &data->img[5]->bpp, 
+	// 	&data->img[5]->size_line, &data->img[5]->endian);
+
+	// data->img[6] = (t_img *)malloc(sizeof(t_img));
+	// data->img[6]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[6]->width, &data->img[6]->height);
+	// data->img[6]->data_addr = mlx_get_data_addr(data->img[6]->img_ptr, &data->img[6]->bpp, 
+	// 	&data->img[6]->size_line, &data->img[6]->endian);
+
+	// data->img[7] = (t_img *)malloc(sizeof(t_img));
+	// data->img[7]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[7]->width, &data->img[7]->height);
+	// data->img[7]->data_addr = mlx_get_data_addr(data->img[7]->img_ptr, &data->img[7]->bpp, 
+	// 	&data->img[7]->size_line, &data->img[7]->endian);
+
+	// data->img[8] = (t_img *)malloc(sizeof(t_img));
+	// data->img[8]->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, \
+	// 	IMG_BOX_WALL, &data->img[8]->width, &data->img[8]->height);
+	// data->img[8]->data_addr = mlx_get_data_addr(data->img[8]->img_ptr, &data->img[8]->bpp, 
+	// 	&data->img[8]->size_line, &data->img[8]->endian);
+	
+	data->mlx_img = mlx_new_image(data->mlx_ptr, screenWidth, screenHeight);
 	x = -1;
 	while (++x < screenWidth)
 	{
@@ -156,8 +211,10 @@ int	game_on(t_data *data)
 		mapY = (int)data->posY;
 		
 		//length of ray from one x or y-side to next x or y-side
-		deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-		deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+		// deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+		// deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+		deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
 
 		hit = 0; //was there a wall hit?
 		
@@ -240,31 +297,25 @@ int	game_on(t_data *data)
 		step = 1.0 * texHeight / lineHeight;
 		// Starting texture coordinate
 		texPos = (drawStart - screenHeight / 2 + lineHeight / 2) * step;
-		y = drawStart - 1;
 		data->mlx_data_addr = mlx_get_data_addr(data->mlx_img, &data->mlx_bits_per_pixel, \
 						&data->mlx_size_line, &data->mlx_endian);
-		while (++y < drawEnd)
+		y = drawStart;
+		while (y < drawEnd)
 		{
 			// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 			texY = (int)texPos & (texHeight - 1);
 			texPos += step;
-			color = (int)data->img[texNum]->img[texHeight * texY + texX];
+			color = texture[texNum][texHeight * texY + texX];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 			if (side == 1)
 				color = (color >> 1) & 8355711;
-			buffer[y][x] = color;
-			my_mlx_pixel_put(data, x, drawStart, buffer[y][x]);
-		}
-		i = -1;
-		while (++i < screenHeight)
-		{
-			j = -1;
-			while (++j < screenWidth)
-				buffer[y][x] = 0;
+			printf("color = %i\n", color);
+			my_mlx_pixel_put(data, x, y, color);
+			y++;
 		}
 	}
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->mlx_img, 0, 0);
-	mlx_destroy_image(data->mlx, data->mlx_img);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->mlx_img, 0, 0);
+	//mlx_destroy_image(data->mlx_ptr, data->mlx_img);
 	return (0);
 	
 }
@@ -323,12 +374,12 @@ int	main(int argc, char *argv[])
 
 	//data->relative_path = "./images/Box_Wall.xpm";
 	initialize_map(data);
-	data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, screenWidth, screenHeight, "Cub3d");
-	mlx_loop_hook(data->mlx, game_on, data);
+	data->mlx_ptr = mlx_init();
+	data->mlx_win = mlx_new_window(data->mlx_ptr, screenWidth, screenHeight, "Cub3d");
+	mlx_loop_hook(data->mlx_ptr, game_on, data);
 	mlx_hook(data->mlx_win, 2, 1L << 0, interactive, data);
 	mlx_hook(data->mlx_win, 17, 1L << 2, ft_close, data);
-	mlx_loop(data->mlx);
+	mlx_loop(data->mlx_ptr);
 
 	//free_data(data) -> needs to be done
 	return (0);
