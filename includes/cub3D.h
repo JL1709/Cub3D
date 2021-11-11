@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 18:42:17 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/11 19:28:34 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,18 @@
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	int		mlx_img_width;
+	int		mlx_img_height;
+}			t_img;
+
+
 typedef struct s_data
 {
 	void	*mlx;
 	void	*mlx_win;
-	void	*mlx_img;
-	int		mlx_img_width;
-	int		mlx_img_height;
 	char	*mlx_data_addr;
 	char	*relative_path;
 	int		mlx_bits_per_pixel;
