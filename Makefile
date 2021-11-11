@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
+#    By: akliek <akliek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/11/05 13:43:50 by jludt            ###   ########.fr        #
+#    Updated: 2021/11/11 13:54:50 by akliek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ YELLOW	= \033[33m
 BLUE	= \033[34m
 
 # Compiling flags
-FLAGS = -Wall -Wextra -Werror
+FLAGS = # -Wall -Wextra -Werror
 
 # Folders
 SRC_DIR = ./src/

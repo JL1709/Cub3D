@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/08 10:21:06 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/11 13:52:10 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,37 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define screenWidth	1280
-# define screenHeight	720
-# define mapWidth		24
-# define mapHeight		24
+# define ESC_KEY 53
+# define PLUS_KEY 69
+# define MINUS_KEY 78
+# define SPACE_KEY 49
+# define ARROW_UP_KEY 126
+# define ARROW_DOWN_KEY 125
+# define ARROW_RIGHT_KEY 124
+# define ARROW_LEFT_KEY 123
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
+
+# define WIDTH	1280
+# define HEIGHT	720
+
+typedef struct s_img
+{
+	void	*ptr;
+	char	*path;
+	char	*addr;
+	int		width;
+	int		height;
+	int		endian;
+	int		line_length;
+	int		bits_per_pixel;
+}			t_img;
 
 typedef struct s_data
 {
 	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
-	int		mlx_img_width;
-	int		mlx_img_height;
-	char	*mlx_data_addr;
-	char	*relative_path;
-	int		mlx_bits_per_pixel;
-	int		mlx_size_line;
-	int		mlx_endian;
-
-	int		blue;
+	void	*win;
+	t_img	img;
 }			t_data;
 
 #endif
