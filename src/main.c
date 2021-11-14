@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 0001/08/11 11:16:07 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 16:07:27 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/14 16:58:29 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,11 @@ void	init_projection_plane(t_data *data)
 	data->grid_size = data->player.map_pos_x - data->projection_plane_width / 2;;
 }
 
-double	get_x_dist(t_data *data, double x1, double y1, double x2)
-{
-	return (0);
-}
-
 void	start_game(t_data *data)
 {
 	int		w;				/* screen width */
 	bool	hit;			/* is wall in grid */
-	double	map_w;
+	double	map_x;
 	double	x_dist;			/* distace to wall in x coordinate */
 	double	y_dist;			/* distace to wall in y coordinate */
 	double	grids_in_pixel; /* number of grids in one pixel*/
@@ -115,16 +110,18 @@ void	start_game(t_data *data)
 	w = 0;
 	init_projection_plane(data);
 	grids_in_pixel = data->projection_plane_width / WIDTH;
-	map_w = data->player.map_pos_x - data->projection_plane_width / 2;
+	map_x = data->player.map_pos_x - data->projection_plane_width / 2;
+	/* 	0;0 = map_x, 0
+		0; HEIGHT = map_pos_x; map_pos_y*/
 	while (w < WIDTH)
 	{
 		hit = 0;
 		while (hit == 0)
 		{
-			x_dist = get_x_dist(data, 0, 0, 0);
+			get_dist(data->player.map_pos_x, data->player.map_pos_x, map_x, 0);
 		}
 		w++;
-		map_w += grids_in_pixel;
+		map_x += grids_in_pixel;
 	}
 }
 
@@ -138,8 +135,6 @@ int	main(int argc, char **argv)
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
 	data->img->ptr = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->img->addr = mlx_get_data_addr(data->img->ptr, &data->img->bits_per_pixel,
-			&data->img->line_length, &data->img->endian);
 	init(data);
 	start_game(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img->ptr, 0, 0);
