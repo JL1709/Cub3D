@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 13:52:10 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/12 16:37:37 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
+/*=======KEYS=======*/
+
 # define ESC_KEY 53
 # define PLUS_KEY 69
 # define MINUS_KEY 78
@@ -30,8 +32,23 @@
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
-# define WIDTH	1280
-# define HEIGHT	720
+/*=======SCEEN_SIZE=======*/
+
+# define WIDTH 1280
+# define HEIGHT 720
+
+/*=======MATH_CONSTANTS=======*/
+
+# define pi 3.14159265359 /* pi number */
+# define rad 0.0174532925 /* radians in one deegre */
+
+typedef enum s_side
+{
+	WEST,
+	EAST,
+	NORTH,
+	SOUTH
+}			t_side;
 
 typedef struct s_img
 {
@@ -45,11 +62,26 @@ typedef struct s_img
 	int		bits_per_pixel;
 }			t_img;
 
+typedef struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+	double	map_pos_x;
+	double	map_pos_y;
+	t_side	side;
+}			t_player;
+
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	t_img	img;
+	void		*mlx;
+	void		*win;
+	t_img		*img;
+	t_player	player;
+
+	double	speed;
+	double	grid_size;
+	double	dst_to_projection_plane;
+	double	projection_plane_width;
 }			t_data;
 
 #endif
