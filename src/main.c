@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 0001/08/11 11:16:07 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 13:36:18 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/14 16:07:27 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	draw_line(t_data *data, int x1, int y1, int x2, int y2)
 	int	y;
 	int	dx;
 	int	dy;
-	int	tmp;
 
 	x = x1;
 	dx = abs(x2 - x1);
@@ -96,21 +95,36 @@ void	init_projection_plane(t_data *data)
 	else
 		data->dst_to_projection_plane = 24 - data->player.map_pos_x;
 	data->projection_plane_width = 2 * (data->dst_to_projection_plane * tan(30 * rad));
+	data->grid_size = data->player.map_pos_x - data->projection_plane_width / 2;;
+}
+
+double	get_x_dist(t_data *data, double x1, double y1, double x2)
+{
+	return (0);
 }
 
 void	start_game(t_data *data)
 {
-	int		w;
+	int		w;				/* screen width */
+	bool	hit;			/* is wall in grid */
+	double	map_w;
+	double	x_dist;			/* distace to wall in x coordinate */
+	double	y_dist;			/* distace to wall in y coordinate */
 	double	grids_in_pixel; /* number of grids in one pixel*/
-	double	grid;
 
 	w = 0;
 	init_projection_plane(data);
-	grid = data->player.map_pos_x - data->projection_plane_width / 2;
 	grids_in_pixel = data->projection_plane_width / WIDTH;
+	map_w = data->player.map_pos_x - data->projection_plane_width / 2;
 	while (w < WIDTH)
 	{
+		hit = 0;
+		while (hit == 0)
+		{
+			x_dist = get_x_dist(data, 0, 0, 0);
+		}
 		w++;
+		map_w += grids_in_pixel;
 	}
 }
 

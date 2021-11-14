@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/12 16:37:37 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/14 14:29:50 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <errno.h>
+# include <stdbool.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
@@ -78,7 +79,7 @@ typedef struct s_data
 	t_img		*img;
 	t_player	player;
 
-	double	speed;
+	double	speed;					/* pixels per one move */
 	double	grid_size;
 	double	dst_to_projection_plane;
 	double	projection_plane_width;
