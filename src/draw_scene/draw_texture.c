@@ -6,13 +6,32 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 20:56:10 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/15 18:07:53 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
+
+
+// void	initialize_map(t_data *data)
+// {	
+// 	data->posX = 22.5;
+// 	data->posY = 4.5;
+// 	data->dirX = -1;
+// 	data->dirY = 0;
+// 	data->planeX = 0;
+// 	data->planeY = 0.66;
+// 	data->moveSpeed = 0.05;
+// 	data->rotSpeed = 0.05;
+// 	load_texture(data);
+// }
+
+/*
+** cameraX range [0 ... 2]
+** 
+*/
 
 void	calc_initial_state(t_data *data, t_rc *rc)
 {
@@ -21,10 +40,8 @@ void	calc_initial_state(t_data *data, t_rc *rc)
 	rc->rayDirY = data->dirY + data->planeY * rc->cameraX;
 	rc->mapX = (int)data->posX;
 	rc->mapY = (int)data->posY;
-	rc->deltaDistX = sqrt(1 + (rc->rayDirY * rc->rayDirY) \
-		/ (rc->rayDirX * rc->rayDirX));
-	rc->deltaDistY = sqrt(1 + (rc->rayDirX * rc->rayDirX) \
-		/ (rc->rayDirY * rc->rayDirY));
+	rc->deltaDistX = fabs(1 / rc->rayDirX);
+	rc->deltaDistY = fabs(1 / rc->rayDirY);
 	rc->hit = 0;
 }
 

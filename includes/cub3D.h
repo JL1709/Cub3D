@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/14 20:20:17 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/15 14:38:36 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ typedef struct s_data
 
 	double	posX;
 	double	posY;
-	double	dirX;
-	double	dirY;
+	double	dirX;		//direction of fov from -1 to 1
+	double	dirY;		//direction of fov from -1 to 1
 	double	planeX;
 	double	planeY;
 	double	moveSpeed;
