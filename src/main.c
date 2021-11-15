@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 0001/08/11 11:16:07 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 16:58:29 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/15 13:36:59 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ void	start_game(t_data *data)
 	init_projection_plane(data);
 	grids_in_pixel = data->projection_plane_width / WIDTH;
 	map_x = data->player.map_pos_x - data->projection_plane_width / 2;
-	/* 	0;0 = map_x, 0
-		0; HEIGHT = map_pos_x; map_pos_y*/
 	while (w < WIDTH)
 	{
 		hit = 0;

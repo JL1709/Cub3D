@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/14 14:29:50 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/15 13:36:53 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
 	double	map_pos_x;
 	double	map_pos_y;
 	t_side	side;
