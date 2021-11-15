@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:46:19 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 20:51:43 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/15 12:06:34 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	load_image(t_data *data, int *texture, char *path, t_img *img)
 	{
 		x = -1;
 		while (++x < img->img_width)
-			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
+			texture[img->img_height * y + x] = img->data[img->img_height * y + x];
 	}
 	mlx_destroy_image(data->mlx, img->img);
 }
