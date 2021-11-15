@@ -3,31 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/11 09:02:58 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/14 20:20:17 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
 # include <math.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <string.h>
 # include <errno.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define screenWidth	1024
-# define screenHeight	512
-# define mapWidth		8
-# define mapHeight		8
-# define mapS			mapWidth*mapHeight
-# define PI				3.1415926535
-# define P2				PI/2
-# define P3				3*PI/2
-# define DR				0.0174533 //one degree in radian
+# define RED		"\x1b[31m"
+# define GREEN		"\x1b[32m"
+# define YELLOW		"\x1b[33m"
+# define BLUE		"\x1b[34m"
+# define MAGENTA	"\x1b[35m"
+# define CYAN		"\x1b[36m"
+# define RESET		"\x1b[0m"
+
+# define SUCCESS		0
+# define FAILURE		1
+
+# define SCREEN_WIDTH	1024
+# define SCREEN_HEIGHT	512
+# define MAP_WIDTH		24
+# define MAP_HEIGHT		24
+# define TEX_WIDTH		64
+# define TEX_HEIGHT		64
 
 # define KEY_ANSI_A		(0X00)
 # define KEY_ANSI_S		(0X01)
@@ -37,43 +49,119 @@
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
 
+// data for raycaster
+typedef struct s_rc
+{
+	int				x;
+	int				y;
+	double			cameraX;
+	double			rayDirX;
+	double			rayDirY;
+	int				mapX;
+	int				mapY;
+	double			sideDistX;
+	double			sideDistY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			perpWallDist;
+	int				stepX;
+	int				stepY;
+	int				hit;
+	int				side;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	int				texNum;
+	double			wallX;
+	int				texX;
+	double			step;
+	double			texPos;
+	int				texY;
+	unsigned int	color;
+}			t_rc;
+
 typedef struct s_img
 {
-	void	*img_ptr;
-	char	*addr;
+	void	*img;
+	int		*data;
+	int		size_l;
 	int		bpp;
-	int		sl;
 	int		endian;
-	int		width;
-	int		height;
+	int		img_width;
+	int		img_height;
 }			t_img;
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	la;
+	int	ra;
+	int	esc;
+}			t_keys;
+
+typedef struct s_map
+{
+	int		f_r;
+	int		f_g;
+	int		f_b;
+	int		c_r;
+	int		c_g;
+	int		c_b;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		**worldMap;
+}			t_map;
 
 typedef struct s_data
 {
-	int		worldMap[mapHeight * mapWidth];
-	
-	// players position
-	float	px;		//x position in map
-	float	py;		//x position in map
-	float	pdx;	//delta x
-	float	pdy;	//delta y
-	float	pa;		//angle of player;
-	
-	void	*mlx_ptr;
+	void	*mlx;
 	void	*mlx_win;
+	void	*mlx_img;
+	char	*mlx_data_addr;
+	int		mlx_bits_per_pixel;
+	int		mlx_size_line;
+	int		mlx_endian;
+	int		img_width;
+	int		img_height;
 	t_img	img;
+	t_keys	key;
+	t_map	map;
+
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+	double	moveSpeed;
+	double	rotSpeed;
+
+	int		texture[8][TEX_HEIGHT * TEX_WIDTH];
 }			t_data;
 
-
-int		interactive(int key, t_data	*data);
-int		create_trgb(int t, int r, int g, int b);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	initialize_map(t_data *data);
-void 	drawPlayer(t_data *data);
-void 	drawDirection(t_data *data);
-void	drawWindowGray(t_data *data);
-void 	drawMap(t_data *data);
-void	drawRays2D(t_data *data);
-float	dist(float ax, float ay, float bx, float by);
+void	load_texture(t_data *data);
+void	load_image(t_data *data, int *texture, char *path, t_img *img);
+int		key_update(t_data *data);
+int		key_press(int key, t_data *data);
+int		key_release(int key, t_data *data);
+int		ft_close(t_data *data);
+int		create_trgb(int t, int r, int g, int b);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		draw_scene(t_data *data);
+void	draw_floor(t_data *data);
+void	draw_ceiling(t_data *data);
+void	calc_initial_state(t_data *data, t_rc *rc);
+void	calc_step_and_side_dist(t_data *data, t_rc *rc);
+void	perform_dda(t_rc *rc);
+void	calc_texturing(t_data *data, t_rc *rc);
+void	draw_texture(t_data *data, t_rc *rc);
+void	draw_minimap(t_data *data);
+int		get_input(t_data *data, int argc, char *argv[]);
 
 #endif

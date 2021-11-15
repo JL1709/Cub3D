@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
+#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/11/10 15:46:35 by julian           ###   ########.fr        #
+#    Updated: 2021/11/14 20:18:14 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,16 @@ LIBFT_DIR = ./libft/
 MINLBX_DIR = ./mlx/
 
 # Source files and object files
-SRC_FILES = main.c			\
-			interactive.c	\
-			utils.c			\
-			draw_stuff.c
+SRC_FILES = main.c								\
+			initialize_map.c					\
+			utils.c								\
+			key_management/key_management.c		\
+			key_management/key_press_release.c	\
+			draw_scene/draw_scene.c 			\
+			draw_scene/draw_floor_ceiling.c 	\
+			draw_scene/draw_texture.c			\
+			draw_scene/draw_minimap.c			\
+			get_input/get_input.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
@@ -52,6 +58,9 @@ all: obj $(LIBFT) $(MINLBX) $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)key_management
+	@mkdir -p $(OBJ_DIR)draw_scene
+	@mkdir -p $(OBJ_DIR)get_input
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@gcc $(FLAGS) -I $(MINLBX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
 $(LIBFT):
