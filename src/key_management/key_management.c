@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:48:00 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/15 14:34:17 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/16 18:12:32 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,20 @@ int	key_update(t_data *data)
 		rotate_right(data);
 	if (data->key.esc)
 		exit(0);
+	return (0);
+}
+
+int	mouse_move(int x, int y, t_data *data)
+{
+	static int	old_x;
+
+	(void)y;
+	
+	if (x > old_x)
+		rotate_right(data);
+	else if (x < old_x)
+		rotate_left(data);
+	old_x = x;	
 	return (0);
 }
 

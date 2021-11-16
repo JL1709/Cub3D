@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/16 13:48:57 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/16 18:12:19 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	load_image(t_data *data, int *texture, char *path, t_img *img);
 int		key_update(t_data *data);
 int		key_press(int key, t_data *data);
 int		key_release(int key, t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 int		ft_close(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
