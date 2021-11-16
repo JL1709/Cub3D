@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 15:44:18 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/16 16:30:54 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_map_look(t_data *data, char *input)
 {
 	int		in;
 	int		i;
-	// int		j;
+	int		j;
 	char	*gnl;
 	char	**src;
 
@@ -59,29 +59,32 @@ int	get_map_look(t_data *data, char *input)
 		return (printf("Empty .cub-file\n"));
 	}
 	i = 0;
-	while ((gnl = get_next_line(in)))
+	while (gnl)
 	{
-		printf("%s", gnl);
 		free(gnl);
 		gnl = NULL;
+		gnl = get_next_line(in);
 		i++;
 	}
-	printf("i = %d\n", i);
+	close(in);
 	src = (char **)malloc(sizeof(char *) * i + 1);
 	if (src == NULL)
 	{
 		printf(RED"Error\n"RESET);
 		return (printf("Memory allocation failed\n"));
 	}
-	// j = 0;
-	// while (j < i)
-	// {
-	// 	src[j] = get_next_line(in);
-	// 	printf("%s", src[j]);
-	// 	j++;
-	// }
-	// src[j] = NULL;
-	// i = -1;
+	in = open(input, O_RDONLY);
+	j = 0;
+	while (j < i)
+	{
+		gnl = get_next_line(in);
+		printf("%s", gnl);
+		src[j++] = ft_strdup(gnl);
+		free(gnl);
+		gnl = NULL;
+	}
+	src[++j] = NULL;
+	i = -1;
 	// while (src[++i] != NULL)
 	// 	printf("%s", src[i]);
 	

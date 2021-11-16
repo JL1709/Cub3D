@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:09:43 by jludt             #+#    #+#             */
-/*   Updated: 2021/07/01 11:39:42 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/16 15:52:36 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j] != '\0')
 		s_join[i++] = s2[j++];
 	s_join[i] = '\0';
+	free((char *)s1);
+	free((char *)s2);
 	return (s_join);
 }
