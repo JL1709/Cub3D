@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/15 10:51:08 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/15 18:56:50 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	test_general(int argc, char *argv[])
 		printf(YELLOW"Usage: "RESET);
 		return(printf("./cub3D .cub_file\n"));
 	}
-	if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".cub", 4))
+	if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".cub", 5))
 	{
 		printf("%s\n", argv[1] + (ft_strlen(argv[1]) - 4));
 		printf(RED"Error\n"RESET);
