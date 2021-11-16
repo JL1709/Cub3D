@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/15 10:51:08 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/16 15:44:18 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ static int	test_general(int argc, char *argv[])
 	}
 	if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".cub", 4))
 	{
-		printf("%s\n", argv[1] + (ft_strlen(argv[1]) - 4));
 		printf(RED"Error\n"RESET);
 		printf("Scene description file must have .cub extension\n");
-				printf(YELLOW"Usage: "RESET);
+		printf(YELLOW"Usage: "RESET);
 		return(printf("./cub3D .cub_file\n"));
 	}
 	in = open(argv[1], O_RDONLY);
@@ -41,34 +40,50 @@ static int	test_general(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-int	get_map_look(t_data *data, char *file)
+
+
+int	get_map_look(t_data *data, char *input)
 {
 	int		in;
-	char	*str;
+	int		i;
+	// int		j;
+	char	*gnl;
+	char	**src;
 
-	(void) *data;
-	
-	in = open(file, O_RDONLY);
-	str = get_next_line(in);
-	if (!str)
+	(void)	*data;
+	in = open(input, O_RDONLY);
+	gnl = get_next_line(in);
+	if (!gnl)
 	{
 		printf(RED"Error\n"RESET);
 		return (printf("Empty .cub-file\n"));
 	}
-	while (str)
+	i = 0;
+	while ((gnl = get_next_line(in)))
 	{
-		if (strncmp(str, "NO ", 3) && strncmp(str, "SO ", 3) 
-			&& strncmp(str, "WE ", 3) && strncmp(str, "EA ", 3)
-			&& strncmp(str, "F ", 2) && strncmp(str, "C ", 2))
-		{
-			free(str);
-			printf(RED"Error\n"RESET);
-			return (printf("Invalid identifier for texture or color\n"));
-		}
-		free(str);
-		str = NULL;
-		str = get_next_line(in);
+		printf("%s", gnl);
+		free(gnl);
+		gnl = NULL;
+		i++;
 	}
+	printf("i = %d\n", i);
+	src = (char **)malloc(sizeof(char *) * i + 1);
+	if (src == NULL)
+	{
+		printf(RED"Error\n"RESET);
+		return (printf("Memory allocation failed\n"));
+	}
+	// j = 0;
+	// while (j < i)
+	// {
+	// 	src[j] = get_next_line(in);
+	// 	printf("%s", src[j]);
+	// 	j++;
+	// }
+	// src[j] = NULL;
+	// i = -1;
+	// while (src[++i] != NULL)
+	// 	printf("%s", src[i]);
 	
 	return (SUCCESS);
 }

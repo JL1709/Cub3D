@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/15 14:38:36 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/16 13:59:02 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_keys
 
 typedef struct s_map
 {
+	char	*file;
 	int		f_r;
 	int		f_g;
 	int		f_b;
