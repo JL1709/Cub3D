@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 18:11:45 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/17 13:42:45 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 		return (FAILURE);
 	data.mlx = mlx_init();
 	initialize_map(&data);
-	data.mlx_win = mlx_new_window(data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");
+	data.mlx_win = mlx_new_window(data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx_mouse_hide();
 	mlx_loop_hook(data.mlx, game_on, &data);
 	mlx_hook(data.mlx_win, 2, 0, &key_press, &data);
@@ -42,4 +42,3 @@ int	main(int argc, char *argv[])
 	mlx_loop(data.mlx);
 	return (0);
 }
-

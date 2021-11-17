@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/16 18:17:53 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/17 14:18:40 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
 void	calc_initial_state(t_data *data, t_rc *rc);
 void	calc_step_and_side_dist(t_data *data, t_rc *rc);
-void	perform_dda(t_rc *rc);
+void	perform_dda(t_rc *rc, t_data *data);
 void	calc_texturing(t_data *data, t_rc *rc);
 void	draw_texture(t_data *data, t_rc *rc);
 void	draw_minimap(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 11:59:53 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/17 14:19:37 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	calc_step_and_side_dist(t_data *data, t_rc *rc)
 	}
 }
 
-void	perform_dda(t_rc *rc)
+void	perform_dda(t_rc *rc, t_data *data)
 {
 	while (rc->hit == 0)
 	{
@@ -59,15 +59,29 @@ void	perform_dda(t_rc *rc)
 			rc->sideDistX += rc->deltaDistX;
 			rc->mapX += rc->stepX;
 			rc->side = 0;
+			if (worldMap[rc->mapX][rc->mapY] > 0)
+			{
+				rc->hit = 1;
+				if (rc->mapX > data->posX)
+					rc->texNum = 4;
+				else
+					rc->texNum = 7;	
+			}
 		}
 		else
 		{
 			rc->sideDistY += rc->deltaDistY;
 			rc->mapY += rc->stepY;
 			rc->side = 1;
+			if (worldMap[rc->mapX][rc->mapY] > 0)
+			{
+				rc->hit = 1;
+				if (rc->mapY > data->posY)
+					rc->texNum = 2;
+				else
+					rc->texNum = 3;	
+			}
 		}
-		if (worldMap[rc->mapX][rc->mapY] > 0)
-			rc->hit = 1;
 	}
 	if (rc->side == 0)
 		rc->perpWallDist = (rc->sideDistX - rc->deltaDistX);
@@ -84,7 +98,7 @@ void	calc_texturing(t_data *data, t_rc *rc)
 	rc->drawEnd = rc->lineHeight / 2 + SCREEN_HEIGHT / 2;
 	if (rc->drawEnd >= SCREEN_HEIGHT)
 		rc->drawEnd = SCREEN_HEIGHT - 1;
-	rc->texNum = worldMap[rc->mapX][rc->mapY] - 1;
+//	rc->texNum = worldMap[rc->mapX][rc->mapY] - 1;
 	if (rc->side == 0)
 		rc->wallX = data->posY + rc->perpWallDist * rc->rayDirY;
 	else

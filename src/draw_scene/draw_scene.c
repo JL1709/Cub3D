@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:50:37 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 16:43:48 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/17 14:18:20 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	raycaster(t_data *data)
 	{
 		calc_initial_state(data, &rc);
 		calc_step_and_side_dist(data, &rc);
-		perform_dda(&rc);
+		perform_dda(&rc, data);
 		calc_texturing(data, &rc);
 		draw_texture(data, &rc);
 	}
