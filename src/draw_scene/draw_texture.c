@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/17 14:19:37 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/18 13:07:03 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	calc_texturing(t_data *data, t_rc *rc)
 	rc->drawEnd = rc->lineHeight / 2 + SCREEN_HEIGHT / 2;
 	if (rc->drawEnd >= SCREEN_HEIGHT)
 		rc->drawEnd = SCREEN_HEIGHT - 1;
-//	rc->texNum = worldMap[rc->mapX][rc->mapY] - 1;
+	if (worldMap[rc->mapX][rc->mapY] == 4)	
+		rc->texNum = 8;
 	if (rc->side == 0)
 		rc->wallX = data->posY + rc->perpWallDist * rc->rayDirY;
 	else

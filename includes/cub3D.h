@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/17 14:18:40 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/17 14:44:10 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ typedef struct s_data
 	double	moveSpeed;
 	double	rotSpeed;
 
-	int		texture[8][TEX_HEIGHT * TEX_WIDTH];
+	int		texture[9][TEX_HEIGHT * TEX_WIDTH];
 }			t_data;
 
 void	initialize_map(t_data *data);
