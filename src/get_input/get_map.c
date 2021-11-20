@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:04:32 by julian            #+#    #+#             */
-/*   Updated: 2021/11/19 18:46:52 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 09:46:37 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,11 @@ static int	check_first_last_row_column(char **map, t_data *data)
 	return (SUCCESS);
 }
 
-int	is_map_valid(t_data *data)
+static int	check_inbetween(t_data *data)
 {
 	int	x;
 	int	y;
 
-	if (check_first_last_row_column(data->map.d2, data))
-		return (FAILURE);
 	x = 0;
 	while (++x < data->map.width - 1)
 	{
@@ -87,5 +85,49 @@ int	is_map_valid(t_data *data)
 			}
 		}
 	}
+	return (SUCCESS);
+}
+
+static int	check_valid_player(t_data *data, int x, int y)
+{
+	int	found;
+
+	x = 0;
+	found = 0;
+	while (++x < data->map.width - 1)
+	{
+		y = 0;
+		while (++y < data->map.height - 1)
+		{
+			if (data->map.d2[x][y] == 'N' || data->map.d2[x][y] == 'E' \
+				|| data->map.d2[x][y] == 'S' || data->map.d2[x][y] == 'W')
+			{
+				found++;
+				if (found > 1)
+					return (printf("Error\nPlayer duplicationn\n"));
+				if (data->map.d2[x - 1][y] == ' ' \
+					|| data->map.d2[x][y - 1] == ' ' \
+					|| data->map.d2[x + 1][y] == ' ' \
+					|| data->map.d2[x][y + 1] == ' ')
+					return (printf("Error\nInvalid player position\n"));
+			}
+		}
+	}
+	return (SUCCESS);
+}
+
+int	is_map_valid(t_data *data)
+{
+	int	x;
+	int	y;
+
+	if (check_first_last_row_column(data->map.d2, data))
+		return (FAILURE);
+	if (check_inbetween(data))
+		return (FAILURE);
+	x = 0;
+	y = 0;
+	if (check_valid_player(data, x, y))
+		return (FAILURE);
 	return (SUCCESS);
 }

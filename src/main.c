@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/18 19:03:21 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/19 20:24:13 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	main(int argc, char *argv[])
 
 	if (get_input(&data, argc, argv) == FAILURE)
 		return (FAILURE);
-	(void) argc;
-	(void) **argv;
 	data.mlx = mlx_init();
 	initialize_map(&data);
 	data.mlx_win = mlx_new_window(data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d");

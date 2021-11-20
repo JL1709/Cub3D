@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:10:02 by julian            #+#    #+#             */
-/*   Updated: 2021/11/19 18:04:26 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/19 20:34:05 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	get_color_fc(t_data *data, char *str)
 		{
 			if (!ft_isdigit(c.rgb[c.i][c.j]))
 				return (helper(c.input, c.rgb, "Error\nColors must be digits\n"));
-			if ((c.i == 0 && ft_isdigit(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '2')
-				|| (c.i > 0 && ft_isdigit(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '5'))
+			if ((c.j == 0 && ft_isdigit(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '2')
+				|| (c.j > 0 && ft_isdigit(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '5'))
 				return (helper(c.input, c.rgb, "Error\nColor range [0,255]\n"));
 		}
 		helper3(data, c.input, c.rgb, c.i);

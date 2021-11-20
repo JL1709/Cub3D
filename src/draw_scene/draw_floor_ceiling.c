@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_floor_ceiling.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:40:09 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/13 12:01:20 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/19 20:26:25 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	draw_floor(t_data *data)
 	int		j;
 	int		color;
 
-	color = create_trgb(0, 139, 90, 43);
+	color = create_trgb(0, data->map.color_floor[0], \
+		data->map.color_floor[1], data->map.color_floor[2]);
 	i = -1;
 	while (++i < SCREEN_WIDTH)
 	{
@@ -36,7 +37,8 @@ void	draw_ceiling(t_data *data)
 	int		j;
 	int		color;
 
-	color = create_trgb(0, 152, 245, 255);
+	color = create_trgb(0, data->map.color_ceiling[0], \
+		data->map.color_ceiling[1], data->map.color_ceiling[2]);
 	i = -1;
 	while (++i < SCREEN_WIDTH)
 	{
