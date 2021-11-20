@@ -6,13 +6,13 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 16:45:06 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 16:45:53 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 18:14:28 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static int		get_squre_size(int n)
+static int	get_squre_size(int n)
 {
 	int	res;
 	int	value;
@@ -23,7 +23,7 @@ static int		get_squre_size(int n)
 		value = SCREEN_WIDTH;
 	res = value / (n * 3);
 	if (res < 2)
-		res = 2;	
+		res = 2;
 	return (res);
 }
 
@@ -38,7 +38,7 @@ static void	draw_player(t_data *data, int w, int h)
 		j = 0;
 		while (++j < h)
 			my_mlx_pixel_put(data, ((int)data->posY * w) + i,
-						((int)data->posX * h) + j, 0x00FF0000);
+				((int)data->posX * h) + j, 0x00FF0000);
 	}
 }
 

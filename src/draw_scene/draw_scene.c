@@ -6,11 +6,26 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:50:37 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 16:24:49 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 18:59:22 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+void	dda_norm_helper(t_data *data, t_rc *rc)
+{
+	rc->side_dist_x += rc->delta_dist_x;
+	rc->map_x += rc->step_x;
+	rc->side = 0;
+	if (data->worldMap[rc->map_x][rc->map_y] > 0)
+	{
+		rc->hit = 1;
+		if (rc->map_x > data->posX)
+			rc->tex_num = 4;
+		else
+			rc->tex_num = 7;
+	}
+}
 
 static void	raycaster(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:04:32 by julian            #+#    #+#             */
-/*   Updated: 2021/11/20 14:31:56 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 18:23:48 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,8 @@ static int	check_inbetween(t_data *data)
 	return (SUCCESS);
 }
 
-static int	check_valid_player(t_data *data, int x, int y)
+static int	check_valid_player(t_data *data, int x, int y, int found)
 {
-	int	found;
-
 	x = 0;
 	found = 0;
 	while (++x < data->map.width - 1)
@@ -122,6 +120,7 @@ int	is_map_valid(t_data *data)
 {
 	int	x;
 	int	y;
+	int	found;
 
 	if (check_first_last_row_column(data->map.d2, data))
 		return (FAILURE);
@@ -129,7 +128,8 @@ int	is_map_valid(t_data *data)
 		return (FAILURE);
 	x = 0;
 	y = 0;
-	if (check_valid_player(data, x, y))
+	found = 0;
+	if (check_valid_player(data, x, y, found))
 		return (FAILURE);
 	return (SUCCESS);
 }

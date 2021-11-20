@@ -6,7 +6,7 @@
 #    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/11/19 16:09:59 by julian           ###   ########.fr        #
+#    Updated: 2021/11/20 18:38:11 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES = main.c								\
 			utils.c								\
 			key_management/key_management.c		\
 			key_management/key_press_release.c	\
+			key_management/key_handle_move.c	\
 			draw_scene/draw_scene.c 			\
 			draw_scene/draw_floor_ceiling.c 	\
 			draw_scene/draw_texture.c			\

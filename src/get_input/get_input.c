@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 16:08:48 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 18:22:07 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	test_general(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-static int	update_map(t_data *data)
+static void	substitute_chars(t_data *data)
 {
 	int	y;
 	int	x;
@@ -56,7 +56,28 @@ static int	update_map(t_data *data)
 				|| data->map.d2[x][y] == 'W')
 				data->map.d2[x][y] = '0';
 		}
+	}	
+}
+
+static void	fill_world_map(t_data *data)
+{
+	int	y;
+	int	x;
+
+	x = -1;
+	while (++x < data->map.width)
+	{
+		y = -1;
+		while (++y < data->map.height)
+			data->worldMap[x][y] = data->map.d2[x][y] - 48;
 	}
+}
+
+static int	update_map(t_data *data)
+{
+	int	x;
+
+	substitute_chars(data);
 	data->worldMap = (int **)malloc(sizeof(int *) * data->map.width);
 	if (data->worldMap == NULL)
 	{
@@ -74,13 +95,7 @@ static int	update_map(t_data *data)
 			return (printf("Memory allocation failed\n"));
 		}
 	}
-	x = -1;
-	while (++x < data->map.width)
-	{
-		y = -1;
-		while (++y < data->map.height)
-			data->worldMap[x][y] = data->map.d2[x][y] - 48;
-	}
+	fill_world_map(data);
 	return (SUCCESS);
 }
 

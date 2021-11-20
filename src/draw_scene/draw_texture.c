@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 16:22:14 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:00:23 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 void	calc_initial_state(t_data *data, t_rc *rc)
 {
-	rc->cameraX = 2 * rc->x / (double)SCREEN_WIDTH - 1;
-	rc->rayDirX = data->dirX + data->planeX * rc->cameraX;
-	rc->rayDirY = data->dirY + data->planeY * rc->cameraX;
-	rc->mapX = (int)data->posX;
-	rc->mapY = (int)data->posY;
-	rc->deltaDistX = fabs(1 / rc->rayDirX);
-	rc->deltaDistY = fabs(1 / rc->rayDirY);
+	rc->camera_x = 2 * rc->x / (double)SCREEN_WIDTH - 1;
+	rc->ray_dir_x = data->dirX + data->planeX * rc->camera_x;
+	rc->ray_dir_y = data->dirY + data->planeY * rc->camera_x;
+	rc->map_x = (int)data->posX;
+	rc->map_y = (int)data->posY;
+	rc->delta_dist_x = fabs(1 / rc->ray_dir_x);
+	rc->delta_dist_y = fabs(1 / rc->ray_dir_y);
 	rc->hit = 0;
 }
 
 void	calc_step_and_side_dist(t_data *data, t_rc *rc)
 {
-	if (rc->rayDirX < 0)
+	if (rc->ray_dir_x < 0)
 	{
-		rc->stepX = -1;
-		rc->sideDistX = (data->posX - rc->mapX) * rc->deltaDistX;
+		rc->step_x = -1;
+		rc->side_dist_x = (data->posX - rc->map_x) * rc->delta_dist_x;
 	}
 	else
 	{
-		rc->stepX = 1;
-		rc->sideDistX = (rc->mapX + 1.0 - data->posX) * rc->deltaDistX;
+		rc->step_x = 1;
+		rc->side_dist_x = (rc->map_x + 1.0 - data->posX) * rc->delta_dist_x;
 	}
-	if (rc->rayDirY < 0)
+	if (rc->ray_dir_y < 0)
 	{
-		rc->stepY = -1;
-		rc->sideDistY = (data->posY - rc->mapY) * rc->deltaDistY;
+		rc->step_y = -1;
+		rc->side_dist_y = (data->posY - rc->map_y) * rc->delta_dist_y;
 	}
 	else
 	{
-		rc->stepY = 1;
-		rc->sideDistY = (rc->mapY + 1.0 - data->posY) * rc->deltaDistY;
+		rc->step_y = 1;
+		rc->side_dist_y = (rc->map_y + 1.0 - data->posY) * rc->delta_dist_y;
 	}
 }
 
@@ -52,73 +52,61 @@ void	perform_dda(t_data *data, t_rc *rc)
 {
 	while (rc->hit == 0)
 	{
-		if (rc->sideDistX < rc->sideDistY)
-		{
-			rc->sideDistX += rc->deltaDistX;
-			rc->mapX += rc->stepX;
-			rc->side = 0;
-			if (data->worldMap[rc->mapX][rc->mapY] > 0)
-			{
-				rc->hit = 1;
-				if (rc->mapX > data->posX)
-					rc->texNum = 4;
-				else
-					rc->texNum = 7;	
-			}
-		}
+		if (rc->side_dist_x < rc->side_dist_y)
+			dda_norm_helper(data, rc);
 		else
 		{
-			rc->sideDistY += rc->deltaDistY;
-			rc->mapY += rc->stepY;
+			rc->side_dist_y += rc->delta_dist_y;
+			rc->map_y += rc->step_y;
 			rc->side = 1;
-			if (data->worldMap[rc->mapX][rc->mapY] > 0)
+			if (data->worldMap[rc->map_x][rc->map_y] > 0)
 			{
 				rc->hit = 1;
-				if (rc->mapY > data->posY)
-					rc->texNum = 2;
+				if (rc->map_y > data->posY)
+					rc->tex_num = 2;
 				else
-					rc->texNum = 3;	
+					rc->tex_num = 3;
 			}
 		}
 	}
 	if (rc->side == 0)
-		rc->perpWallDist = (rc->sideDistX - rc->deltaDistX);
+		rc->perp_wall_dist = (rc->side_dist_x - rc->delta_dist_x);
 	else
-		rc->perpWallDist = (rc->sideDistY - rc->deltaDistY);
+		rc->perp_wall_dist = (rc->side_dist_y - rc->delta_dist_y);
 }
 
 void	calc_texturing(t_data *data, t_rc *rc)
 {
-	rc->lineHeight = ((int)(SCREEN_HEIGHT / rc->perpWallDist)) * 2;
-	rc->drawStart = -rc->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rc->drawStart < 0)
-		rc->drawStart = 0;
-	rc->drawEnd = rc->lineHeight / 2 + SCREEN_HEIGHT / 2;
-	if (rc->drawEnd >= SCREEN_HEIGHT)
-		rc->drawEnd = SCREEN_HEIGHT - 1;
+	rc->line_height = ((int)(SCREEN_HEIGHT / rc->perp_wall_dist)) * 2;
+	rc->draw_start = -rc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rc->draw_start < 0)
+		rc->draw_start = 0;
+	rc->draw_end = rc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rc->draw_end >= SCREEN_HEIGHT)
+		rc->draw_end = SCREEN_HEIGHT - 1;
 	if (rc->side == 0)
-		rc->wallX = data->posY + rc->perpWallDist * rc->rayDirY;
+		rc->wall_x = data->posY + rc->perp_wall_dist * rc->ray_dir_y;
 	else
-		rc->wallX = data->posX + rc->perpWallDist * rc->rayDirX;
-	rc->wallX -= floor((rc->wallX));
-	rc->texX = (int)(rc->wallX * (double)(TEX_WIDTH));
-	if (rc->side == 0 && rc->rayDirX > 0)
-		rc->texX = TEX_WIDTH - rc->texX - 1;
-	if (rc->side == 1 && rc->rayDirY < 0)
-		rc->texX = TEX_WIDTH - rc->texX - 1;
-	rc->step = 1.0 * TEX_HEIGHT / rc->lineHeight;
-	rc->texPos = (rc->drawStart - SCREEN_HEIGHT / 2 \
-		+ rc->lineHeight / 2) * rc->step;
-	rc->y = rc->drawStart - 1;
+		rc->wall_x = data->posX + rc->perp_wall_dist * rc->ray_dir_x;
+	rc->wall_x -= floor((rc->wall_x));
+	rc->tex_x = (int)(rc->wall_x * (double)(TEX_WIDTH));
+	if (rc->side == 0 && rc->ray_dir_x > 0)
+		rc->tex_x = TEX_WIDTH - rc->tex_x - 1;
+	if (rc->side == 1 && rc->ray_dir_y < 0)
+		rc->tex_x = TEX_WIDTH - rc->tex_x - 1;
+	rc->step = 1.0 * TEX_HEIGHT / rc->line_height;
+	rc->tex_pos = (rc->draw_start - SCREEN_HEIGHT / 2 \
+		+ rc->line_height / 2) * rc->step;
+	rc->y = rc->draw_start - 1;
 }
 
 void	draw_texture(t_data *data, t_rc *rc)
 {
-	while (++rc->y < rc->drawEnd)
+	while (++rc->y < rc->draw_end)
 	{
-		rc->texY = (int)rc->texPos & (TEX_HEIGHT - 1);
-		rc->texPos += rc->step;
-		rc->color = data->texture[rc->texNum][TEX_HEIGHT * rc->texY + rc->texX];
+		rc->tex_y = (int)rc->tex_pos & (TEX_HEIGHT - 1);
+		rc->tex_pos += rc->step;
+		rc->color = data->texture[rc->tex_num][TEX_HEIGHT * rc->tex_y + rc->tex_x];
 		if (rc->side == 1)
 			rc->color /= 2;
 		my_mlx_pixel_put(data, rc->x, rc->y, rc->color);
