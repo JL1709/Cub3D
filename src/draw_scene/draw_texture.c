@@ -6,13 +6,11 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 14:54:29 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:22:14 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
 
 void	calc_initial_state(t_data *data, t_rc *rc)
 {
@@ -52,7 +50,6 @@ void	calc_step_and_side_dist(t_data *data, t_rc *rc)
 
 void	perform_dda(t_data *data, t_rc *rc)
 {
-	(void)	*data;
 	while (rc->hit == 0)
 	{
 		if (rc->sideDistX < rc->sideDistY)
@@ -60,15 +57,29 @@ void	perform_dda(t_data *data, t_rc *rc)
 			rc->sideDistX += rc->deltaDistX;
 			rc->mapX += rc->stepX;
 			rc->side = 0;
+			if (data->worldMap[rc->mapX][rc->mapY] > 0)
+			{
+				rc->hit = 1;
+				if (rc->mapX > data->posX)
+					rc->texNum = 4;
+				else
+					rc->texNum = 7;	
+			}
 		}
 		else
 		{
 			rc->sideDistY += rc->deltaDistY;
 			rc->mapY += rc->stepY;
 			rc->side = 1;
+			if (data->worldMap[rc->mapX][rc->mapY] > 0)
+			{
+				rc->hit = 1;
+				if (rc->mapY > data->posY)
+					rc->texNum = 2;
+				else
+					rc->texNum = 3;	
+			}
 		}
-		if (worldMap[rc->mapX][rc->mapY] > 0)
-			rc->hit = 1;
 	}
 	if (rc->side == 0)
 		rc->perpWallDist = (rc->sideDistX - rc->deltaDistX);
@@ -85,7 +96,6 @@ void	calc_texturing(t_data *data, t_rc *rc)
 	rc->drawEnd = rc->lineHeight / 2 + SCREEN_HEIGHT / 2;
 	if (rc->drawEnd >= SCREEN_HEIGHT)
 		rc->drawEnd = SCREEN_HEIGHT - 1;
-	rc->texNum = worldMap[rc->mapX][rc->mapY] - 1;
 	if (rc->side == 0)
 		rc->wallX = data->posY + rc->perpWallDist * rc->rayDirY;
 	else

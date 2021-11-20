@@ -6,13 +6,11 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:48:00 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 14:52:43 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:16:50 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
 
 static void	rotate_left(t_data *data)
 {
@@ -42,33 +40,33 @@ static void	rotate_right(t_data *data)
 
 static void	move_forward(t_data *data)
 {
-	if (worldMap[(int)(data->posX + data->dirX * data->moveSpeed)][(int)data->posY] == 0)
+	if (data->worldMap[(int)(data->posX + data->dirX * data->moveSpeed)][(int)data->posY] == 0)
 		data->posX += data->dirX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY + data->dirY * data->moveSpeed)] == 0) 
+	if (data->worldMap[(int)data->posX][(int)(data->posY + data->dirY * data->moveSpeed)] == 0) 
 		data->posY += data->dirY * data->moveSpeed;
 }
 
 static void	move_backward(t_data *data)
 {
-	if (worldMap[(int)(data->posX - data->dirX * data->moveSpeed)][(int)data->posY] == 0)
+	if (data->worldMap[(int)(data->posX - data->dirX * data->moveSpeed)][(int)data->posY] == 0)
 		data->posX -= data->dirX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY - data->dirY * data->moveSpeed)] == 0) 
+	if (data->worldMap[(int)data->posX][(int)(data->posY - data->dirY * data->moveSpeed)] == 0) 
 		data->posY -= data->dirY * data->moveSpeed;
 }
 
 static void	move_left(t_data *data)
 {
-	if (worldMap[(int)(data->posX - data->planeX * data->moveSpeed)][(int)data->posY] == 0)
+	if (data->worldMap[(int)(data->posX - data->planeX * data->moveSpeed)][(int)data->posY] == 0)
 		data->posX -= data->planeX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY - data->planeY * data->moveSpeed)] == 0) 
+	if (data->worldMap[(int)data->posX][(int)(data->posY - data->planeY * data->moveSpeed)] == 0) 
 		data->posY -= data->planeY * data->moveSpeed;
 }
 
 static void	move_right(t_data *data)
 {
-	if (worldMap[(int)(data->posX + data->planeX * data->moveSpeed)][(int)data->posY] == 0)
+	if (data->worldMap[(int)(data->posX + data->planeX * data->moveSpeed)][(int)data->posY] == 0)
 		data->posX += data->planeX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY + data->planeY * data->moveSpeed)] == 0) 
+	if (data->worldMap[(int)data->posX][(int)(data->posY + data->planeY * data->moveSpeed)] == 0) 
 		data->posY += data->planeY * data->moveSpeed;
 }
 

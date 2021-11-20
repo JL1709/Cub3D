@@ -6,13 +6,11 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:40:09 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/19 20:26:25 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:16:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
 
 void	draw_floor(t_data *data)
 {

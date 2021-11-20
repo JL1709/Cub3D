@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/20 14:39:59 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:45:34 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ typedef struct s_data
 	double	planeY;
 	double	moveSpeed;
 	double	rotSpeed;
-
+	int		**worldMap;
 	int		texture[8][TEX_HEIGHT * TEX_WIDTH];
 }			t_data;
 

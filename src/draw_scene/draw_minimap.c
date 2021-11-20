@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 16:45:06 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 17:24:34 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:45:53 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
-
-// static void	draw_background(t_data *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		color;
-
-// 	color = create_trgb(0, 128, 128, 128);
-// 	i = -1;
-// 	while (++i < MAP_WIDTH * 5)
-// 	{
-// 		j = -1;
-// 		while (++j < MAP_HEIGHT * 5)
-// 			my_mlx_pixel_put(data, i, j, color);
-// 	}
-// }
 
 static int		get_squre_size(int n)
 {
@@ -68,14 +50,14 @@ static void	draw_map(t_data *data, int w, int h, int color)
 	int		j;
 
 	y = -1;
-	while (++y < MAP_HEIGHT)
+	while (++y < data->map.width)
 	{
 		x = -1;
-		while (++x < MAP_WIDTH)
+		while (++x < data->map.height)
 		{
-			if (x == (int)data->posX && y == (int)data->posY)
+			if (x == (int)data->posY && y == (int)data->posX)
 				draw_player(data, w, h);
-			if (worldMap[y][x] > 0)
+			if (data->worldMap[y][x] > 0)
 			{
 				i = 0;
 				while (++i < w)
@@ -95,8 +77,8 @@ void	draw_minimap(t_data *data)
 	int	h;
 	int	color;
 
-	w = get_squre_size(MAP_WIDTH);
-	h = get_squre_size(MAP_HEIGHT);
+	w = get_squre_size(24);
+	h = get_squre_size(24);
 	color = create_trgb(0, 255, 255, 255);
 	draw_map(data, w, h, color);
 }
