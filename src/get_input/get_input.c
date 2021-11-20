@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/19 18:47:19 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 14:49:21 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,29 @@ static int	test_general(int argc, char *argv[])
 	return (SUCCESS);
 }
 
+static void	update_map(t_data *data)
+{
+	int	y;
+	int	x;
+
+	x = -1;
+	while (++x < data->map.width)
+	{
+		y = -1;
+		while (++y < data->map.height)
+		{
+			if (data->map.d2[x][y] == ' ')
+				data->map.d2[x][y] = '0';
+		}
+	}
+}
+
 int	get_input(t_data *data, int argc, char *argv[])
 {
 	if (test_general(argc, argv))
 		return (FAILURE);
 	if (get_map_look(data, argv[1]))
 		return (FAILURE);
+	update_map(data);
 	return (SUCCESS);
 }

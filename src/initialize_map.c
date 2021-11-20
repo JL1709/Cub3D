@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:46:19 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/18 19:14:09 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 14:32:10 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int worldMap[MAP_WIDTH][MAP_HEIGHT]=
 
 void	initialize_map(t_data *data)
 {	
-	data->posX = 3.5;
-	data->posY = 4.5;
 	if (data->map.player == 'N')
 	{
 		data->dirX = -1;

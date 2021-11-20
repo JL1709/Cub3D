@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 11:56:25 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 11:59:53 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/20 14:54:29 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void	calc_step_and_side_dist(t_data *data, t_rc *rc)
 	}
 }
 
-void	perform_dda(t_rc *rc)
+void	perform_dda(t_data *data, t_rc *rc)
 {
+	(void)	*data;
 	while (rc->hit == 0)
 	{
 		if (rc->sideDistX < rc->sideDistY)

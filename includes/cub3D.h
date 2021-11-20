@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/19 20:06:50 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 14:39:59 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ typedef struct s_data
 	t_img	img;
 	t_keys	key;
 	t_map	map;
-
 	double	posX;
 	double	posY;
 	double	dirX;		//direction of fov from -1 to 1
@@ -192,7 +191,7 @@ void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
 void	calc_initial_state(t_data *data, t_rc *rc);
 void	calc_step_and_side_dist(t_data *data, t_rc *rc);
-void	perform_dda(t_rc *rc);
+void	perform_dda(t_data *data, t_rc *rc);
 void	calc_texturing(t_data *data, t_rc *rc);
 void	draw_texture(t_data *data, t_rc *rc);
 void	draw_minimap(t_data *data);
