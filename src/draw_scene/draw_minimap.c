@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 16:45:06 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 18:14:28 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:04:14 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	draw_player(t_data *data, int w, int h)
 	{
 		j = 0;
 		while (++j < h)
-			my_mlx_pixel_put(data, ((int)data->posY * w) + i,
-				((int)data->posX * h) + j, 0x00FF0000);
+			my_mlx_pixel_put(data, ((int)data->pos_y * w) + i,
+				((int)data->pos_x * h) + j, 0x00FF0000);
 	}
 }
 
@@ -55,9 +55,9 @@ static void	draw_map(t_data *data, int w, int h, int color)
 		x = -1;
 		while (++x < data->map.height)
 		{
-			if (x == (int)data->posY && y == (int)data->posX)
+			if (x == (int)data->pos_y && y == (int)data->pos_x)
 				draw_player(data, w, h);
-			if (data->worldMap[y][x] > 0)
+			if (data->world_map[y][x] > 0)
 			{
 				i = 0;
 				while (++i < w)

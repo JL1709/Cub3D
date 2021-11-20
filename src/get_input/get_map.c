@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:04:32 by julian            #+#    #+#             */
-/*   Updated: 2021/11/20 18:23:48 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:02:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ static int	check_valid_player(t_data *data, int x, int y, int found)
 			if (data->map.d2[x][y] == 'N' || data->map.d2[x][y] == 'E' \
 				|| data->map.d2[x][y] == 'S' || data->map.d2[x][y] == 'W')
 			{
-				data->posX = x + 0.5;
-				data->posY = y + 0.5;
+				data->pos_x = x + 0.5;
+				data->pos_y = y + 0.5;
 				found++;
 				if (found > 1)
 					return (printf("Error\nPlayer duplicationn\n"));

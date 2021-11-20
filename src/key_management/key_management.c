@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:48:00 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 18:39:34 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:04:16 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static void	move_left(t_data *data)
 {
-	if (data->worldMap[(int)(data->posX \
-		- data->planeX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX -= data->planeX * data->moveSpeed;
-	if (data->worldMap[(int)data->posX][(int)(data->posY \
-		- data->planeY * data->moveSpeed)] == 0)
-		data->posY -= data->planeY * data->moveSpeed;
+	if (data->world_map[(int)(data->pos_x \
+		- data->plane_x * data->move_speed)][(int)data->pos_y] == 0)
+		data->pos_x -= data->plane_x * data->move_speed;
+	if (data->world_map[(int)data->pos_x][(int)(data->pos_y \
+		- data->plane_y * data->move_speed)] == 0)
+		data->pos_y -= data->plane_y * data->move_speed;
 }
 
 static void	move_right(t_data *data)
 {
-	if (data->worldMap[(int)(data->posX \
-		+ data->planeX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX += data->planeX * data->moveSpeed;
-	if (data->worldMap[(int)data->posX][(int)(data->posY \
-		+ data->planeY * data->moveSpeed)] == 0)
-		data->posY += data->planeY * data->moveSpeed;
+	if (data->world_map[(int)(data->pos_x \
+		+ data->plane_x * data->move_speed)][(int)data->pos_y] == 0)
+		data->pos_x += data->plane_x * data->move_speed;
+	if (data->world_map[(int)data->pos_x][(int)(data->pos_y \
+		+ data->plane_y * data->move_speed)] == 0)
+		data->pos_y += data->plane_y * data->move_speed;
 }
 
 int	key_update(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:46:19 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 18:43:06 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:03:51 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static void	initialize_map_norm_helper(t_data *data)
 {
 	if (data->map.player == 'S')
 	{
-		data->dirX = 1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = -0.66;
+		data->dir_x = 1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = -0.66;
 	}
 	if (data->map.player == 'W')
 	{
-		data->dirX = 0;
-		data->dirY = -1;
-		data->planeX = -0.66;
-		data->planeY = 0;
+		data->dir_x = 0;
+		data->dir_y = -1;
+		data->plane_x = -0.66;
+		data->plane_y = 0;
 	}
 }
 
@@ -34,21 +34,21 @@ void	initialize_map(t_data *data)
 {	
 	if (data->map.player == 'N')
 	{
-		data->dirX = -1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = 0.66;
+		data->dir_x = -1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = 0.66;
 	}
 	if (data->map.player == 'E')
 	{
-		data->dirX = 0;
-		data->dirY = 1;
-		data->planeX = 0.66;
-		data->planeY = 0;
+		data->dir_x = 0;
+		data->dir_y = 1;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
 	}
 	initialize_map_norm_helper(data);
-	data->moveSpeed = 0.025;
-	data->rotSpeed = 0.025;
+	data->move_speed = 0.025;
+	data->rot_speed = 0.025;
 	load_texture(data);
 }
 

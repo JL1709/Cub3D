@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/20 19:00:22 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:05:43 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_rc
 
 typedef struct s_color
 {
-	char 	**input;
+	char	**input;
 	char	**rgb;
 	int		i;
 	int		j;
@@ -145,7 +145,7 @@ typedef struct s_val
 	int	x;
 	int	y;
 	int	end_x;
-	int end_y;
+	int	end_y;
 }			t_val;
 
 typedef struct s_data
@@ -162,15 +162,15 @@ typedef struct s_data
 	t_img	img;
 	t_keys	key;
 	t_map	map;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	moveSpeed;
-	double	rotSpeed;
-	int		**worldMap;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
+	int		**world_map;
 	int		texture[8][TEX_HEIGHT * TEX_WIDTH];
 }			t_data;
 
@@ -198,7 +198,7 @@ void	calc_texturing(t_data *data, t_rc *rc);
 void	draw_texture(t_data *data, t_rc *rc);
 void	draw_minimap(t_data *data);
 int		get_input(t_data *data, int argc, char *argv[]);
-int 	ft_array_len(char **array);
+int		ft_array_len(char **array);
 void	ft_free_array(char **array);
 void	free_path_textures(t_data *data);
 int		get_map_look(t_data *data, char *file);

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:45:22 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 18:22:07 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/20 19:04:15 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	fill_world_map(t_data *data)
 	{
 		y = -1;
 		while (++y < data->map.height)
-			data->worldMap[x][y] = data->map.d2[x][y] - 48;
+			data->world_map[x][y] = data->map.d2[x][y] - 48;
 	}
 }
 
@@ -78,8 +78,8 @@ static int	update_map(t_data *data)
 	int	x;
 
 	substitute_chars(data);
-	data->worldMap = (int **)malloc(sizeof(int *) * data->map.width);
-	if (data->worldMap == NULL)
+	data->world_map = (int **)malloc(sizeof(int *) * data->map.width);
+	if (data->world_map == NULL)
 	{
 		ft_free_array(data->map.d2);
 		return (printf("Error\nMemory allocation failed\n"));
@@ -87,8 +87,8 @@ static int	update_map(t_data *data)
 	x = -1;
 	while (++x < data->map.width)
 	{
-		data->worldMap[x] = (int *)malloc(sizeof(int) * data->map.height);
-		if (data->worldMap[x] == NULL)
+		data->world_map[x] = (int *)malloc(sizeof(int) * data->map.height);
+		if (data->world_map[x] == NULL)
 		{
 			ft_free_array(data->map.d2);
 			printf("Error\n");
