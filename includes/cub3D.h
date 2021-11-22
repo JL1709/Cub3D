@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/20 19:05:43 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:15:09 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define KEY_LEFTARROW	(0X7B)
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
+# define KEY_PAUSE		(0X23)
 
 // data for raycaster
 typedef struct s_rc
@@ -113,6 +114,7 @@ typedef struct s_keys
 	int	la;
 	int	ra;
 	int	esc;
+	int	pause;
 }			t_keys;
 
 typedef struct s_map

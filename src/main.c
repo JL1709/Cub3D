@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 18:45:05 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:13:30 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int	game_on(t_data *data)
 {
-	data->mlx_img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	data->mlx_data_addr = mlx_get_data_addr(data->mlx_img, \
-		&data->mlx_bits_per_pixel, &data->mlx_size_line, &data->mlx_endian);
-	draw_scene(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->mlx_img, 0, 0);
-	mlx_destroy_image(data->mlx, data->mlx_img);
-	key_update(data);
+	if (data->key.pause > 0)
+	{
+		data->mlx_img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+		data->mlx_data_addr = mlx_get_data_addr(data->mlx_img, \
+			&data->mlx_bits_per_pixel, &data->mlx_size_line, &data->mlx_endian);
+		draw_scene(data);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->mlx_img, 0, 0);
+		mlx_destroy_image(data->mlx, data->mlx_img);
+		key_update(data);
+	}
 	return (0);
 }
 

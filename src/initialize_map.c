@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:46:19 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/20 19:03:51 by julian           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:16:27 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	initialize_map(t_data *data)
 		data->plane_y = 0;
 	}
 	initialize_map_norm_helper(data);
-	data->move_speed = 0.025;
-	data->rot_speed = 0.025;
+	data->move_speed = 0.03;
+	data->rot_speed = 0.03;
+	data->key.pause = 1;
 	load_texture(data);
 }
 
