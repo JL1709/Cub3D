@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 16:10:02 by julian            #+#    #+#             */
-/*   Updated: 2021/11/22 12:59:45 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/22 13:22:25 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,51 @@ static int	helper2(t_data *data, char **input, char **rgb)
 		if (ft_array_len(rgb) != 3)
 			return (helper(input, rgb, "Error\nWrong number of arguments\n"));
 		if (rgb[2][ft_strlen(rgb[2]) - 1] == '\n')
-		{
-			//printf("rgb[2] = %s\n", rgb[2]);
-			rgb[2] = ft_strtrim(rgb[2], "\n");
-			//system("leaks cub3D");
-		}
+			rgb[2] = ft_substr(rgb[2], 0, ft_strlen(rgb[2] - 1));
 	}
 	return (SUCCESS);
 }
 
-static void	helper3(t_data *data, char **input, char **rgb, int i)
+static int	helper3(t_color *c)
 {
-	if (!ft_strcmp(input[0], "F"))
-		data->map.color_floor[i] = ft_atoi(rgb[i]);
+	if (ft_strlen(c->rgb[c->i]) == 3)
+	{
+		if (!ft_isdigit(c->rgb[c->i][c->j]))
+			return (helper(c->input, c->rgb, "Error\nColors must be digits\n"));
+		if ((c->j == 0 && ft_id(c->rgb[c->i][c->j]) && c->rgb[c->i][c->j] > '2')
+			|| (c->j == 1 && ft_id(c->rgb[c->i][c->j]) \
+				&& c->rgb[c->i][c->j] > '5'))
+			return (helper(c->input, c->rgb, "Error\nColor range [0,255]\n"));
+	}
 	else
-		data->map.color_ceiling[i] = ft_atoi(rgb[i]);
+	{
+		if (!ft_isdigit(c->rgb[c->i][c->j]))
+			return (helper(c->input, c->rgb, "Error\nColors must be digits\n"));
+	}
+	return (SUCCESS);
 }
 
-static int	helper4(t_data *data, char **input, char **rgb)
+static int	helper4(t_data *data, char **input, char **rgb, int i)
 {
-	if (!ft_strcmp(input[0], "F"))
-		data->map.color_floor[3] = 1;
+	if (i == -1)
+	{
+		if (!ft_strcmp(input[0], "F"))
+			data->map.color_floor[3] = 1;
+		else
+			data->map.color_ceiling[3] = 1;
+		ft_free_array(input);
+		ft_free_array(rgb);
+		data->map.info++;
+		return (SUCCESS);
+	}
 	else
-		data->map.color_ceiling[3] = 1;
-	ft_free_array(input);
-	ft_free_array(rgb);
-	data->map.info++;
-	return (SUCCESS);
+	{
+		if (!ft_strcmp(input[0], "F"))
+			data->map.color_floor[i] = ft_atoi(rgb[i]);
+		else
+			data->map.color_ceiling[i] = ft_atoi(rgb[i]);
+		return (SUCCESS);
+	}
 }
 
 int	get_color_fc(t_data *data, char *str)
@@ -81,27 +99,14 @@ int	get_color_fc(t_data *data, char *str)
 		return (FAILURE);
 	c.i = -1;
 	while (++c.i < 3)
-	{
+	{	
 		if (ft_strlen(c.rgb[c.i]) > 3)
 			return (helper(c.input, c.rgb, "Error\nColor range [0,255]\n"));
 		c.j = -1;
 		while (c.rgb[c.i][++c.j] != '\0')
-		{
-			if (ft_strlen(c.rgb[c.i]) == 3)
-			{
-				if (!ft_isdigit(c.rgb[c.i][c.j]))
-					return (helper(c.input, c.rgb, "Error\nColors must be digits\n"));
-				if ((c.j == 0 && ft_id(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '2')
-					|| (c.j == 1 && ft_id(c.rgb[c.i][c.j]) && c.rgb[c.i][c.j] > '5'))
-					return (helper(c.input, c.rgb, "Error\nColor range [0,255]\n"));
-			}
-			else
-			{
-				if (!ft_isdigit(c.rgb[c.i][c.j]))
-					return (helper(c.input, c.rgb, "Error\nColors must be digits\n"));
-			}
-		}
-		helper3(data, c.input, c.rgb, c.i);
+			if (helper3(&c))
+				return (FAILURE);
+		helper4(data, c.input, c.rgb, c.i);
 	}
-	return (helper4(data, c.input, c.rgb));
+	return (helper4(data, c.input, c.rgb, -1));
 }
