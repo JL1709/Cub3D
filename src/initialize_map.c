@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:46:19 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/18 12:55:36 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:20:22 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	initialize_map(t_data *data)
 	data->planeX = 0;
 	data->planeY = 0.66;
 	data->moveSpeed = 0.05;
-	data->rotSpeed = 0.05;
+	data->rotSpeed = 0.03;
+	data->key.pause = 1;
 	load_texture(data);
 }
 

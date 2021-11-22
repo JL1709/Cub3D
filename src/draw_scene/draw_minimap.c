@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 16:45:06 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 17:24:34 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/18 16:20:27 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int		get_squre_size(int n)
 		value = SCREEN_WIDTH;
 	res = value / (n * 3);
 	if (res < 2)
-		res = 2;	
+		res = 2;
 	return (res);
 }
 

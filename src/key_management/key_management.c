@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:48:00 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 18:12:32 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:23:06 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ int	key_update(t_data *data)
 	if (data->key.ra)
 		rotate_right(data);
 	if (data->key.esc)
-		exit(0);
+		exit(0);	
 	return (0);
 }
 
 int	mouse_move(int x, int y, t_data *data)
 {
-	static int	old_x;
-
 	(void)y;
-	
-	if (x > old_x)
-		rotate_right(data);
-	else if (x < old_x)
-		rotate_left(data);
-	old_x = x;	
+	if (data->key.pause > 0)
+	{
+		mlx_mouse_move(data->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		if (x > SCREEN_WIDTH / 2)
+			rotate_right(data);
+		else if (x < SCREEN_WIDTH / 2)
+			rotate_left(data);
+	}
 	return (0);
 }
 

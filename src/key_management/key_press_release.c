@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press_release.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 12:09:56 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/14 19:32:50 by jludt            ###   ########.fr       */
+/*   Updated: 2021/11/19 14:21:18 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int	key_press(int key, t_data *data)
 		data->key.la = 1;
 	else if (key == KEY_RIGHTARROW)
 		data->key.ra = 1;
+	else if (key == 126)
+	{
+		data->key.pause *= -1;
+		if (data->key.pause < 0)
+			mlx_mouse_show();
+		else
+			mlx_mouse_hide();	
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/17 14:44:10 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:19:47 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_keys
 	int	la;
 	int	ra;
 	int	esc;
+	int	pause;
 }			t_keys;
 
 typedef struct s_map
