@@ -6,31 +6,13 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 16:45:06 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 17:24:34 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:20:46 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
-
-// static void	draw_background(t_data *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		color;
-
-// 	color = create_trgb(0, 128, 128, 128);
-// 	i = -1;
-// 	while (++i < MAP_WIDTH * 5)
-// 	{
-// 		j = -1;
-// 		while (++j < MAP_HEIGHT * 5)
-// 			my_mlx_pixel_put(data, i, j, color);
-// 	}
-// }
-
-static int		get_squre_size(int n)
+static int	get_squre_size(int n)
 {
 	int	res;
 	int	value;
@@ -41,7 +23,7 @@ static int		get_squre_size(int n)
 		value = SCREEN_WIDTH;
 	res = value / (n * 3);
 	if (res < 2)
-		res = 2;	
+		res = 2;
 	return (res);
 }
 
@@ -55,8 +37,8 @@ static void	draw_player(t_data *data, int w, int h)
 	{
 		j = 0;
 		while (++j < h)
-			my_mlx_pixel_put(data, ((int)data->posY * w) + i,
-						((int)data->posX * h) + j, 0x00FF0000);
+			my_mlx_pixel_put(data, ((int)data->pos_y * w) + i,
+				((int)data->pos_x * h) + j, 0x00FF0000);
 	}
 }
 
@@ -68,14 +50,14 @@ static void	draw_map(t_data *data, int w, int h, int color)
 	int		j;
 
 	y = -1;
-	while (++y < MAP_HEIGHT)
+	while (++y < data->map.width)
 	{
 		x = -1;
-		while (++x < MAP_WIDTH)
+		while (++x < data->map.height)
 		{
-			if (x == (int)data->posX && y == (int)data->posY)
+			if (x == (int)data->pos_y && y == (int)data->pos_x)
 				draw_player(data, w, h);
-			if (worldMap[y][x] > 0)
+			if (data->world_map[y][x] > 0)
 			{
 				i = 0;
 				while (++i < w)
@@ -95,8 +77,8 @@ void	draw_minimap(t_data *data)
 	int	h;
 	int	color;
 
-	w = get_squre_size(MAP_WIDTH);
-	h = get_squre_size(MAP_HEIGHT);
+	w = get_squre_size(24);
+	h = get_squre_size(24);
 	color = create_trgb(0, 255, 255, 255);
 	draw_map(data, w, h, color);
 }

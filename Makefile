@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
+#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/11/14 20:18:14 by jludt            ###   ########.fr        #
+#    Updated: 2021/11/20 18:38:11 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,18 @@ SRC_FILES = main.c								\
 			utils.c								\
 			key_management/key_management.c		\
 			key_management/key_press_release.c	\
+			key_management/key_handle_move.c	\
 			draw_scene/draw_scene.c 			\
 			draw_scene/draw_floor_ceiling.c 	\
 			draw_scene/draw_texture.c			\
 			draw_scene/draw_minimap.c			\
-			get_input/get_input.c
+			get_input/get_input.c				\
+			get_input/get_input_utils.c			\
+			get_input/get_map_look.c			\
+			get_input/get_color_fc.c			\
+			get_input/get_path_to_texture.c		\
+			get_input/get_map.c					\
+			get_input/init_map2d.c				
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

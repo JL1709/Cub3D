@@ -6,70 +6,30 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 10:48:00 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/16 18:12:32 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:20:31 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-extern int	worldMap[MAP_WIDTH][MAP_HEIGHT];
-
-static void	rotate_left(t_data *data)
-{
-	double	oldDirX;
-	double	oldPlaneX;
-
-	oldDirX = data->dirX;
-	data->dirX = data->dirX * cos(data->rotSpeed) - data->dirY * sin(data->rotSpeed);
-	data->dirY = oldDirX * sin(data->rotSpeed) + data->dirY * cos(data->rotSpeed);
-	oldPlaneX = data->planeX;
-	data->planeX = data->planeX * cos(data->rotSpeed) - data->planeY * sin(data->rotSpeed);
-	data->planeY = oldPlaneX * sin(data->rotSpeed) + data->planeY * cos(data->rotSpeed);
-}
-
-static void	rotate_right(t_data *data)
-{
-	double	oldDirX;
-	double	oldPlaneX;
-
-	oldDirX = data->dirX;
-	data->dirX = data->dirX * cos(-data->rotSpeed) - data->dirY * sin(-data->rotSpeed);
-	data->dirY = oldDirX * sin(-data->rotSpeed) + data->dirY * cos(-data->rotSpeed);
-	oldPlaneX = data->planeX;
-	data->planeX = data->planeX * cos(-data->rotSpeed) - data->planeY * sin(-data->rotSpeed);
-	data->planeY = oldPlaneX * sin(-data->rotSpeed) + data->planeY * cos(-data->rotSpeed);
-}
-
-static void	move_forward(t_data *data)
-{
-	if (worldMap[(int)(data->posX + data->dirX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX += data->dirX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY + data->dirY * data->moveSpeed)] == 0) 
-		data->posY += data->dirY * data->moveSpeed;
-}
-
-static void	move_backward(t_data *data)
-{
-	if (worldMap[(int)(data->posX - data->dirX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX -= data->dirX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY - data->dirY * data->moveSpeed)] == 0) 
-		data->posY -= data->dirY * data->moveSpeed;
-}
-
 static void	move_left(t_data *data)
 {
-	if (worldMap[(int)(data->posX - data->planeX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX -= data->planeX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY - data->planeY * data->moveSpeed)] == 0) 
-		data->posY -= data->planeY * data->moveSpeed;
+	if (data->world_map[(int)(data->pos_x \
+		- data->plane_x * data->move_speed)][(int)data->pos_y] == 0)
+		data->pos_x -= data->plane_x * data->move_speed;
+	if (data->world_map[(int)data->pos_x][(int)(data->pos_y \
+		- data->plane_y * data->move_speed)] == 0)
+		data->pos_y -= data->plane_y * data->move_speed;
 }
 
 static void	move_right(t_data *data)
 {
-	if (worldMap[(int)(data->posX + data->planeX * data->moveSpeed)][(int)data->posY] == 0)
-		data->posX += data->planeX * data->moveSpeed;
-	if (worldMap[(int)data->posX][(int)(data->posY + data->planeY * data->moveSpeed)] == 0) 
-		data->posY += data->planeY * data->moveSpeed;
+	if (data->world_map[(int)(data->pos_x \
+		+ data->plane_x * data->move_speed)][(int)data->pos_y] == 0)
+		data->pos_x += data->plane_x * data->move_speed;
+	if (data->world_map[(int)data->pos_x][(int)(data->pos_y \
+		+ data->plane_y * data->move_speed)] == 0)
+		data->pos_y += data->plane_y * data->move_speed;
 }
 
 int	key_update(t_data *data)
@@ -93,15 +53,15 @@ int	key_update(t_data *data)
 
 int	mouse_move(int x, int y, t_data *data)
 {
-	static int	old_x;
-
 	(void)y;
-	
-	if (x > old_x)
-		rotate_right(data);
-	else if (x < old_x)
-		rotate_left(data);
-	old_x = x;	
+	if (data->key.pause > 0)
+	{
+		mlx_mouse_move(data->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		if (x > SCREEN_WIDTH / 2)
+			rotate_right(data);
+		else if (x < SCREEN_WIDTH / 2)
+			rotate_left(data);
+	}
 	return (0);
 }
 

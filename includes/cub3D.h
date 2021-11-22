@@ -6,7 +6,7 @@
 /*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/11/17 14:18:40 by akliek           ###   ########.fr       */
+/*   Updated: 2021/11/22 11:21:25 by akliek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@
 
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT	512
-# define MAP_WIDTH		24
-# define MAP_HEIGHT		24
 # define TEX_WIDTH		64
 # define TEX_HEIGHT		64
 
@@ -48,37 +46,53 @@
 # define KEY_LEFTARROW	(0X7B)
 # define KEY_RIGHTARROW	(0X7C)
 # define KEY_ESCAPE		(0X35)
+# define KEY_PAUSE		(0X23)
 
 // data for raycaster
 typedef struct s_rc
 {
 	int				x;
 	int				y;
-	double			cameraX;
-	double			rayDirX;
-	double			rayDirY;
-	int				mapX;
-	int				mapY;
-	double			sideDistX;
-	double			sideDistY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			perpWallDist;
-	int				stepX;
-	int				stepY;
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;
+	int				step_y;
 	int				hit;
 	int				side;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
-	int				texNum;
-	double			wallX;
-	int				texX;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_num;
+	double			wall_x;
+	int				tex_x;
 	double			step;
-	double			texPos;
-	int				texY;
+	double			tex_pos;
+	int				tex_y;
 	unsigned int	color;
 }			t_rc;
+
+typedef struct s_color
+{
+	char	**input;
+	char	**rgb;
+	int		i;
+	int		j;
+}			t_color;
+
+typedef struct s_valid
+{
+	int		in;
+	char	*str;
+	int		nl;
+}			t_valid;
 
 typedef struct s_img
 {
@@ -100,22 +114,41 @@ typedef struct s_keys
 	int	la;
 	int	ra;
 	int	esc;
+	int	pause;
 }			t_keys;
 
 typedef struct s_map
 {
-	int		f_r;
-	int		f_g;
-	int		f_b;
-	int		c_r;
-	int		c_g;
-	int		c_b;
+	int		info;
+	int		color_floor[4];
+	int		color_ceiling[4];
 	char	*no;
+	int		n_no;
 	char	*so;
+	int		n_so;
 	char	*we;
+	int		n_we;
 	char	*ea;
-	int		**worldMap;
+	int		n_ea;
+	char	*d1;
+	char	**d2;
+	int		width;
+	int		height;
+	int		**world_map;
+	char	player;
+	double	player_pos_x;
+	double	player_pos_y;
+	double	player_view_x;
+	double	player_view_y;
 }			t_map;
+
+typedef struct s_val
+{
+	int	x;
+	int	y;
+	int	end_x;
+	int	end_y;
+}			t_val;
 
 typedef struct s_data
 {
@@ -131,16 +164,15 @@ typedef struct s_data
 	t_img	img;
 	t_keys	key;
 	t_map	map;
-
-	double	posX;
-	double	posY;
-	double	dirX;		//direction of fov from -1 to 1
-	double	dirY;		//direction of fov from -1 to 1
-	double	planeX;
-	double	planeY;
-	double	moveSpeed;
-	double	rotSpeed;
-
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
+	int		**world_map;
 	int		texture[8][TEX_HEIGHT * TEX_WIDTH];
 }			t_data;
 
@@ -151,6 +183,10 @@ int		key_update(t_data *data);
 int		key_press(int key, t_data *data);
 int		key_release(int key, t_data *data);
 int		mouse_move(int x, int y, t_data *data);
+void	rotate_left(t_data *data);
+void	rotate_right(t_data *data);
+void	move_forward(t_data *data);
+void	move_backward(t_data *data);
 int		ft_close(t_data *data);
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -159,10 +195,22 @@ void	draw_floor(t_data *data);
 void	draw_ceiling(t_data *data);
 void	calc_initial_state(t_data *data, t_rc *rc);
 void	calc_step_and_side_dist(t_data *data, t_rc *rc);
-void	perform_dda(t_rc *rc, t_data *data);
+void	perform_dda(t_data *data, t_rc *rc);
 void	calc_texturing(t_data *data, t_rc *rc);
 void	draw_texture(t_data *data, t_rc *rc);
 void	draw_minimap(t_data *data);
 int		get_input(t_data *data, int argc, char *argv[]);
+int		ft_array_len(char **array);
+void	ft_free_array(char **array);
+void	free_path_textures(t_data *data);
+int		get_map_look(t_data *data, char *file);
+int		init_map2d(t_data *data);
+int		init_map_input(t_data *data);
+int		fill_map_info(t_data *data, char *str);
+int		get_color_fc(t_data *data, char *str);
+int		get_path_to_texture(t_data *data, char *str);
+int		check_map_for_invalid_char(t_data *data, char *s);
+int		is_map_valid(t_data *data);
+void	dda_norm_helper(t_data *data, t_rc *rc);
 
 #endif
