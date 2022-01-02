@@ -20,11 +20,14 @@ make
 
 #### 3)  Run program
 ```
-./Cub3D
+./Cub3D map/rc.cub
 ```
 Press/hold:
-- a - rotate to the left
-- d - rotate to the right
+- a - move to the left
+- d - move to the right
 - w - move foreward
 - s - move backwards
+- ← - rotate to the left
+- → - rotate to the right
+- Rotate the point of view with the mouse
 
