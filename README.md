@@ -1,5 +1,5 @@
 # Cub3D
-This repo provides a program thath creates a dynamic view inside a maze using [ray casting](https://en.wikipedia.org/wiki/Ray_casting).
+This repo provides a program that creates a dynamic view inside a maze using [ray casting](https://en.wikipedia.org/wiki/Ray_casting).
 
 ![Teaser Visualizer](demo.png)
 
