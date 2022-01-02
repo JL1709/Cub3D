@@ -1,5 +1,5 @@
 # Cub3D
-This repo provides a program that demonstrates how to create a 3D impression out of a 2D image using [ray casting](https://en.wikipedia.org/wiki/Ray_casting).
+This repo provides a program thath creates a dynamic view inside a maze using [ray casting](https://en.wikipedia.org/wiki/Ray_casting).
 
 ![Teaser Visualizer](demo.png)
 
@@ -9,18 +9,18 @@ Tested on macOS Monterey.
 
 #### 1) Clone this repository 
 ```
-git clone git@github.com:JL1709/Raycast_visualizer.git
+git clone git@github.com:JL1709/Cub3D.git
 ```
 
 #### 2) Execute Makfile
 ```
-cd Raycast_visualizer
+cd Cub3D
 make
 ```
 
 #### 3)  Run program
 ```
-./raycast_visualizer
+./Cub3D
 ```
 Press/hold:
 - a - rotate to the left
