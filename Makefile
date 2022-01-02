@@ -6,7 +6,7 @@
 #    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/11/20 18:38:11 by julian           ###   ########.fr        #
+#    Updated: 2022/01/02 20:10:53 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,14 +87,12 @@ clean:
 	@rm -Rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MINLBX_DIR) clean
-	@echo
 
 # fclean rule
 fclean: clean
 	@echo "$(BLUE)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo
 
 # re rule
 re: fclean all

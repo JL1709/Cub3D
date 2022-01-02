@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akliek <akliek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/11/22 11:20:14 by akliek           ###   ########.fr       */
+/*   Updated: 2022/01/02 20:09:33 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+Resources:
+https://lodev.org/cgtutor/raycasting.html
+*/
 
 #include "../includes/cub3D.h"
 
