@@ -31,3 +31,4 @@ Press/hold:
 - → - rotate to the right
 - Rotate the point of view with the mouse
 
+This project was developed together with <a href="https://github.com/akliek">akliek</a>
